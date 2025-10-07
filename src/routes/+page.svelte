@@ -8,7 +8,6 @@
   let availableCards = [];
   let drawnCards = [];
   let justDrawnCards = [];
-  let draggedCardId = null;
   let selectedCard = null;
   let filter = 'all';
   let drawCount = 3;
@@ -59,10 +58,6 @@
     justDrawnCards = [];
   }
   
-  function handleDragStart(e) {
-    draggedCardId = e.dataTransfer.getData('text/plain');
-  }
-  
   function handleFilterChange(newFilter) {
     filter = newFilter;
   }
@@ -77,6 +72,9 @@
     : availableCards.filter(c => 
         filter === 'outlaw' ? c.category === 'Outlaw' : c.category === 'Law Abiding'
       );
+      
+  $: console.log('Available cards:', availableCards.length);
+  $: console.log('Filtered available:', filteredAvailable.length);
 </script>
 
 <svelte:head>
@@ -114,12 +112,6 @@
         disabled={availableCards.length === 0}
         class="bg-gradient-to-r from-blue-600 to-blue-700 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-lg text-sm md:text-base"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m21 16-4 4-4-4"/>
-          <path d="M17 20V4"/>
-          <path d="m3 8 4-4 4 4"/>
-          <path d="M7 4v16"/>
-        </svg>
         Draw {drawCount} Card{drawCount !== 1 ? 's' : ''} ({availableCards.length} available)
       </button>
       
@@ -127,12 +119,6 @@
         on:click={shuffleDeck}
         class="bg-gradient-to-r from-purple-600 to-purple-700 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all flex items-center gap-2 shadow-lg text-sm md:text-base"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m21 16-4 4-4-4"/>
-          <path d="M17 20V4"/>
-          <path d="m3 8 4-4 4 4"/>
-          <path d="M7 4v16"/>
-        </svg>
         Shuffle Deck
       </button>
       
@@ -140,12 +126,6 @@
         on:click={resetDeck}
         class="bg-gradient-to-r from-gray-600 to-gray-700 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:from-gray-700 hover:to-gray-800 transition-all flex items-center gap-2 shadow-lg text-sm md:text-base"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
-          <path d="M21 3v5h-5"/>
-          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
-          <path d="M3 21v-5h5"/>
-        </svg>
         Reset All
       </button>
     </div>
@@ -158,7 +138,7 @@
       <div class="mb-8 animate-fade-in">
         <div class="bg-gradient-to-r from-yellow-900 via-yellow-800 to-yellow-900 rounded-xl p-6 border-4 border-yellow-500 shadow-2xl">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-yellow-100 flex items-center gap-2">
+            <h2 class="text-2xl md:text-3xl font-bold text-yellow-100">
               Just Drawn
             </h2>
             <button
@@ -171,11 +151,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {#each justDrawnCards as card (card.id)}
               <div class="animate-bounce-in">
-                <IntrigueCard
-                  intrigue={card}
-                  isDragging={draggedCardId === card.id}
-                  on:dragstart={handleDragStart}
-                />
+                <IntrigueCard intrigue={card} />
               </div>
             {/each}
           </div>
@@ -184,27 +160,17 @@
     {/if}
 
     <div class="bg-gray-800 rounded-xl p-4 md:p-6 min-h-[400px] border-2 border-gray-700">
-      <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 7h-9"/>
-          <path d="M14 17H5"/>
-          <circle cx="17" cy="17" r="3"/>
-          <circle cx="7" cy="7" r="3"/>
-        </svg>
+      <h2 class="text-xl md:text-2xl font-bold mb-4">
         Available Deck ({filteredAvailable.length})
       </h2>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {#each filteredAvailable as card (card.id)}
-          <IntrigueCard
-            intrigue={card}
-            isDragging={draggedCardId === card.id}
-            on:dragstart={handleDragStart}
-          />
-        {/each}
-      </div>
-      
-      {#if filteredAvailable.length === 0}
+      {#if filteredAvailable.length > 0}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {#each filteredAvailable as card (card.id)}
+            <IntrigueCard intrigue={card} />
+          {/each}
+        </div>
+      {:else}
         <div class="text-center text-gray-500 py-20">
           {filter === 'all' ? 'All cards have been drawn' : 'No cards match this filter'}
         </div>
