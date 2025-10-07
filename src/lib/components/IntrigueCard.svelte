@@ -88,7 +88,7 @@
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
-    background: url('/necromunda-bg.jpg');
+    background: url('/necromunda-bg.png');
     background-size: cover;
     background-position: center;
     border-radius: 0;
