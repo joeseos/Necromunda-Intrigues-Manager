@@ -37,18 +37,6 @@
 
   <!-- Card content -->
   <div class="card-body">
-    <!-- Value badge -->
-    <div class="value-badge">
-      <span class="value-number">{intrigue.value}</span>
-      <span class="value-suit">
-        {#if isOutlaw}
-          ♦
-        {:else}
-          ♠
-        {/if}
-      </span>
-    </div>
-
     <!-- Info section -->
     <div class="info-section">
       <div class="info-row">
@@ -59,7 +47,7 @@
         <span class="info-label">TEST</span>
         <span class="info-value">{intrigue.alignmentTest}</span>
       </div>
-      <div class="info-row">
+      <div class="info-row reward-row">
         <span class="info-label">REWARD</span>
       </div>
       <div class="reward-text">{intrigue.reward}</div>
@@ -80,7 +68,7 @@
   .intrigue-card {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 580px;
     cursor: move;
     transition: transform 0.2s ease;
     overflow: hidden;
@@ -108,9 +96,9 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 80px;
     background: url('/necromunda-frame.png') top center no-repeat;
-    background-size: 100% auto;
+    background-size: 100% 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,7 +107,7 @@
   }
 
   .card-name {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -132,47 +120,18 @@
 
   .card-body {
     position: absolute;
-    top: 60px;
-    bottom: 40px;
-    left: 0;
-    right: 0;
-    padding: 20px;
+    top: 80px;
+    bottom: 60px;
+    left: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     z-index: 1;
   }
 
-  .value-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px;
-    background: rgba(139, 0, 0, 0.85);
-    border: 2px solid #8B0000;
-    width: fit-content;
-    align-self: center;
-  }
-
-  .value-number {
-    font-size: 40px;
-    font-weight: 900;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-    line-height: 1;
-  }
-
-  .value-suit {
-    font-size: 32px;
-    color: #ffffff;
-    line-height: 1;
-  }
-
   .info-section {
     padding: 12px 16px;
-    background: rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(0, 0, 0, 0.3);
   }
 
   .info-row {
@@ -181,6 +140,10 @@
     align-items: baseline;
     margin-bottom: 6px;
     font-size: 12px;
+  }
+
+  .reward-row {
+    margin-bottom: 4px;
   }
 
   .info-label {
@@ -203,16 +166,11 @@
     color: #000000;
     font-weight: 700;
     font-size: 13px;
-    margin-top: 4px;
-    padding-top: 6px;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
   }
 
   .criteria-section {
     flex: 1;
     padding: 12px 16px;
-    background: rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -239,9 +197,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 40px;
+    height: 60px;
     background: url('/necromunda-frame.png') bottom center no-repeat;
-    background-size: 100% auto;
+    background-size: 100% 100%;
     transform: rotate(180deg);
     z-index: 2;
   }
