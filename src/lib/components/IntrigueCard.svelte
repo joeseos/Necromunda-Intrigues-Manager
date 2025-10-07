@@ -73,9 +73,9 @@
   .card-header {
     width: 100%;
     height: 70px;
-    background-image: url('/necromunda-frame.png');
-    background-size: 100% 100%; /* Updated to 100% 100% */
-    background-position: center;
+    background-image: url('/necromunda-frame.png'); /* Complete image applied */
+    background-size: cover; /* Keep the aspect ratio intact */
+    background-position: top; /* Align it to the top */
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
@@ -166,9 +166,9 @@
   .card-footer {
     width: 100%;
     height: 50px;
-    background-image: url('/necromunda-frame.png');
-    background-size: 100% 100%; /* Updated to 100% 100% */
-    background-position: center;
+    background-image: url('/necromunda-frame.png'); /* Complete image applied */
+    background-size: cover; /* Keep the aspect ratio intact */
+    background-position: bottom; /* Align it to the bottom */
     background-repeat: no-repeat;
     transform: rotate(180deg);
     flex-shrink: 0;
