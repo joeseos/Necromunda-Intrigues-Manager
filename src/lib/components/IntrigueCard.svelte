@@ -62,6 +62,8 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.2s ease;
+    border-radius: 12px;
+    overflow: hidden;
   }
 
   .intrigue-card:hover {
