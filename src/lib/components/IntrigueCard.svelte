@@ -74,8 +74,8 @@
     width: 100%;
     height: 70px;
     background-image: url('/necromunda-frame.png');
-    background-size: 100% 100%;
-    background-position: top center;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
@@ -167,8 +167,8 @@
     width: 100%;
     height: 50px;
     background-image: url('/necromunda-frame.png');
-    background-size: 100% 100%;
-    background-position: bottom center;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     transform: rotate(180deg);
     flex-shrink: 0;
