@@ -27,25 +27,24 @@
   tabindex="-1"
 >
   <div class="modal-card" on:click|stopPropagation>
-    <!-- Header -->
-    <div class="card-header">
-      <div class="header-text">{intrigue.name}</div>
-      <button
-        on:click={onClose}
-        class="close-button"
-        aria-label="Close"
-        type="button"
-      >
-        ×
-      </button>
-    </div>
+    <button
+      on:click={onClose}
+      class="close-button"
+      aria-label="Close"
+      type="button"
+    >
+      ×
+    </button>
 
-    <!-- Body Content -->
-    <div class="card-body">
+    <div class="card-content">
+      <div class="header-text">{intrigue.name}</div>
+
       <div class="info-section">
         <div class="info-row">
           <span class="info-label">CATEGORY</span>
-          <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">{intrigue.category}</span>
+          <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
+            {intrigue.category}
+          </span>
         </div>
         <div class="info-row">
           <span class="info-label">TEST</span>
@@ -69,9 +68,6 @@
         </div>
       {/if}
     </div>
-
-    <!-- Footer -->
-    <div class="card-footer"></div>
   </div>
 </div>
 
@@ -92,80 +88,76 @@
     position: relative;
     width: 100%;
     max-width: 500px;
-    min-height: 700px;
+    aspect-ratio: 298 / 583;
     background-image: url('/necromunda-bg.png');
     background-size: cover;
     background-position: center;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
-    border-radius: 12px;
-    overflow: hidden;
   }
 
-  .card-header {
-    position: relative;
-    width: 100%;
-    height: 80px;
+  /* Frame overlay identical to the small card */
+  .modal-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
     background-image: url('/necromunda-frame.png');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 1; /* sits below the text */
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 2; /* above the overlay */
+    flex: 1;
+    padding: 32px 28px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 60px;
-    flex-shrink: 0;
+    flex-direction: column;
+    overflow-y: auto;
   }
 
   .header-text {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     text-align: center;
-    line-height: 1.2;
+    margin-bottom: 12px;
   }
 
   .close-button {
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 12px;
+    right: 18px;
     background: none;
     border: none;
     color: #ffffff;
-    font-size: 40px;
+    font-size: 36px;
     font-weight: bold;
     cursor: pointer;
     line-height: 1;
-    padding: 0;
-    width: 40px;
-    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-    z-index: 10;
+    z-index: 3; /* stays above everything */
   }
 
   .close-button:hover {
     transform: scale(1.2);
   }
 
-  .card-body {
-    flex: 1;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    overflow-y: auto;
-  }
-
   .info-section {
-    padding: 16px 20px;
+    padding: 12px 16px;
   }
 
   .info-row {
@@ -223,16 +215,5 @@
 
   .notes-text {
     font-style: italic;
-  }
-
-  .card-footer {
-    width: 100%;
-    height: 60px;
-    background-image: url('/necromunda-frame.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    transform: rotate(180deg);
-    flex-shrink: 0;
   }
 </style>
