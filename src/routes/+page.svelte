@@ -12,7 +12,6 @@
   let selectedCard = null;
   let filter = 'all';
   let drawCount = 3;
-  let isDropZoneActive = { available: false, drawn: false };
   
   onMount(() => {
     shuffleDeck();
@@ -62,52 +61,6 @@
   
   function handleDragStart(e) {
     draggedCardId = e.dataTransfer.getData('text/plain');
-  }
-  
-  function handleDragOver(e) {
-    e.preventDefault();
-  }
-  
-  function handleDragEnter(zone) {
-    isDropZoneActive[zone] = true;
-  }
-  
-  function handleDragLeave(zone) {
-    isDropZoneActive[zone] = false;
-  }
-  
-  function handleDropToDrawn(e) {
-    e.preventDefault();
-    isDropZoneActive.drawn = false;
-    
-    if (!draggedCardId) return;
-    
-    const card = availableCards.find(c => c.id === draggedCardId);
-    if (card) {
-      availableCards = availableCards.filter(c => c.id !== draggedCardId);
-      drawnCards = [...drawnCards, card];
-    }
-    draggedCardId = null;
-  }
-  
-  function handleDropToAvailable(e) {
-    e.preventDefault();
-    isDropZoneActive.available = false;
-    
-    if (!draggedCardId) return;
-    
-    let card = drawnCards.find(c => c.id === draggedCardId);
-    if (card) {
-      drawnCards = drawnCards.filter(c => c.id !== draggedCardId);
-      availableCards = [...availableCards, card];
-    } else {
-      card = justDrawnCards.find(c => c.id === draggedCardId);
-      if (card) {
-        justDrawnCards = justDrawnCards.filter(c => c.id !== draggedCardId);
-        availableCards = [...availableCards, card];
-      }
-    }
-    draggedCardId = null;
   }
   
   function handleFilterChange(newFilter) {
@@ -212,10 +165,10 @@
               on:click={acknowledgeDrawnCards}
               class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-semibold transition-all whitespace-nowrap"
             >
-              Acknowledge and Move to Drawn Pile
+              Acknowledge and Continue
             </button>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {#each justDrawnCards as card (card.id)}
               <div class="animate-bounce-in">
                 <IntrigueCard
@@ -230,85 +183,36 @@
       </div>
     {/if}
 
-    <div class="grid lg:grid-cols-2 gap-6">
-      <div
-        class="drop-zone bg-gray-800 rounded-xl p-4 md:p-6 min-h-[400px] border-2 transition-all"
-        class:border-gray-700={!isDropZoneActive.available}
-        class:drop-zone-active={isDropZoneActive.available}
-        on:dragover={handleDragOver}
-        on:dragenter={() => handleDragEnter('available')}
-        on:dragleave={() => handleDragLeave('available')}
-        on:drop={handleDropToAvailable}
-        role="region"
-        aria-label="Available deck"
-      >
-        <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 7h-9"/>
-            <path d="M14 17H5"/>
-            <circle cx="17" cy="17" r="3"/>
-            <circle cx="7" cy="7" r="3"/>
-          </svg>
-          Available Deck ({filteredAvailable.length})
-        </h2>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {#each filteredAvailable as card (card.id)}
-            <IntrigueCard
-              intrigue={card}
-              isDragging={draggedCardId === card.id}
-              on:dragstart={handleDragStart}
-            />
-          {/each}
-        </div>
-        
-        {#if filteredAvailable.length === 0}
-          <div class="text-center text-gray-500 py-20">
-            {filter === 'all' ? 'All cards have been drawn' : 'No cards match this filter'}
-          </div>
-        {/if}
+    <div class="bg-gray-800 rounded-xl p-4 md:p-6 min-h-[400px] border-2 border-gray-700">
+      <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9"/>
+          <path d="M14 17H5"/>
+          <circle cx="17" cy="17" r="3"/>
+          <circle cx="7" cy="7" r="3"/>
+        </svg>
+        Available Deck ({filteredAvailable.length})
+      </h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {#each filteredAvailable as card (card.id)}
+          <IntrigueCard
+            intrigue={card}
+            isDragging={draggedCardId === card.id}
+            on:dragstart={handleDragStart}
+          />
+        {/each}
       </div>
-
-      <div
-        class="drop-zone bg-gray-800 rounded-xl p-4 md:p-6 min-h-[400px] border-2 transition-all"
-        class:border-blue-600={!isDropZoneActive.drawn}
-        class:drop-zone-active={isDropZoneActive.drawn}
-        on:dragover={handleDragOver}
-        on:dragenter={() => handleDragEnter('drawn')}
-        on:dragleave={() => handleDragLeave('drawn')}
-        on:drop={handleDropToDrawn}
-        role="region"
-        aria-label="Drawn cards"
-      >
-        <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2v20"/>
-            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-          </svg>
-          Drawn Cards ({drawnCards.length + justDrawnCards.length} total, {drawnCards.length} in pile)
-        </h2>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {#each drawnCards as card (card.id)}
-            <IntrigueCard
-              intrigue={card}
-              isDragging={draggedCardId === card.id}
-              on:dragstart={handleDragStart}
-            />
-          {/each}
+      
+      {#if filteredAvailable.length === 0}
+        <div class="text-center text-gray-500 py-20">
+          {filter === 'all' ? 'All cards have been drawn' : 'No cards match this filter'}
         </div>
-        
-        {#if drawnCards.length === 0}
-          <div class="text-center text-gray-500 py-20">
-            <p class="mb-2">Drag cards here or use Draw Cards</p>
-            <p class="text-sm">Click any card to view details</p>
-          </div>
-        {/if}
-      </div>
+      {/if}
     </div>
 
     <footer class="text-center text-gray-500 text-xs md:text-sm mt-8 space-y-1">
-      <p>Drag cards between decks - Click cards for full details - Cards return when dragged back</p>
+      <p>Click cards for full details</p>
       <p class="text-gray-600">Built for Necromunda tabletop gaming</p>
     </footer>
   </div>
