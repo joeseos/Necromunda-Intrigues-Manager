@@ -1,69 +1,3 @@
-<script>
-  export let intrigue;
-  export let draggable = true;
-  export let isDragging = false;
-  
-  const isOutlaw = intrigue.suit === 'diamonds';
-  
-  function handleDragStart(e) {
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', intrigue.id);
-  }
-  
-  function handleClick() {
-    const event = new CustomEvent('cardclick', {
-      detail: intrigue
-    });
-    document.dispatchEvent(event);
-  }
-</script>
-
-<div
-  class="intrigue-card {isDragging ? 'card-dragging' : ''}"
-  draggable={draggable}
-  on:dragstart={handleDragStart}
-  on:click={handleClick}
-  on:keypress={(e) => e.key === 'Enter' && handleClick()}
-  role="button"
-  tabindex="0"
->
-  <!-- Background -->
-  <div class="card-background"></div>
-  
-  <!-- Header with card name -->
-  <div class="card-header">
-    <h3 class="card-name">{intrigue.name}</h3>
-  </div>
-
-  <!-- Card content -->
-  <div class="card-body">
-    <!-- Info section -->
-    <div class="info-section">
-      <div class="info-row">
-        <span class="info-label">CATEGORY</span>
-        <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">{intrigue.category}</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">TEST</span>
-        <span class="info-value">{intrigue.alignmentTest}</span>
-      </div>
-      <div class="info-row reward-row">
-        <span class="info-label">REWARD</span>
-      </div>
-      <div class="reward-text">{intrigue.reward}</div>
-    </div>
-
-    <!-- Criteria -->
-    <div class="criteria-section">
-      <div class="criteria-label">CRITERIA</div>
-      <div class="criteria-text">{intrigue.criteria}</div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <div class="card-footer"></div>
-</div>
-
 <style>
   .intrigue-card {
     position: relative;
@@ -96,17 +30,25 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 80px;
-    background: url('/necromunda-frame.png') top center no-repeat;
-    background-size: 100% 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 60px;
+    height: 70px;
     z-index: 2;
   }
 
+  .card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: url('/necromunda-frame.png') top center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
   .card-name {
+    position: relative;
+    z-index: 3;
     font-size: 14px;
     font-weight: 900;
     text-transform: uppercase;
@@ -116,12 +58,13 @@
     text-align: center;
     margin: 0;
     line-height: 1.2;
+    padding-top: 15px;
   }
 
   .card-body {
     position: absolute;
-    top: 80px;
-    bottom: 60px;
+    top: 70px;
+    bottom: 50px;
     left: 20px;
     right: 20px;
     display: flex;
@@ -197,10 +140,20 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
-    background: url('/necromunda-frame.png') bottom center no-repeat;
-    background-size: 100% 100%;
-    transform: rotate(180deg);
+    height: 50px;
     z-index: 2;
+  }
+
+  .card-footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: url('/necromunda-frame.png') bottom center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotate(180deg);
   }
 </style>
