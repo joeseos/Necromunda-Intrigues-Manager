@@ -18,17 +18,15 @@
   role="button"
   tabindex="0"
 >
-  <!-- Header -->
-  <div class="card-header">
+  <div class="card-content">
     <div class="header-text">{intrigue.name}</div>
-  </div>
 
-  <!-- Body Content -->
-  <div class="card-body">
     <div class="info-section">
       <div class="info-row">
         <span class="info-label">CATEGORY</span>
-        <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">{intrigue.category}</span>
+        <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
+          {intrigue.category}
+        </span>
       </div>
       <div class="info-row">
         <span class="info-label">TEST</span>
@@ -45,43 +43,50 @@
       <div class="criteria-text">{intrigue.criteria}</div>
     </div>
   </div>
-
-  <!-- Footer -->
-  <div class="card-footer"></div>
 </div>
 
 <style>
   .intrigue-card {
     position: relative;
     width: 100%;
-    min-height: 580px;
-    cursor: pointer;
+    aspect-ratio: 298 / 583; /* keep proportions consistent */
     background-image: url('/necromunda-bg.png');
-    background-size: cover;
+    background-size: cover; /* ensures same scaling */
     background-position: center;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     transition: transform 0.2s ease;
-    border-radius: 12px;
-    overflow: hidden;
   }
 
   .intrigue-card:hover {
     transform: scale(1.02);
   }
 
-  .card-header {
-    width: 100%;
-    height: 70px;
-    background-image: url('/necromunda-frame.png'); /* Complete image applied */
-    background-size: cover; /* Keep the aspect ratio intact */
-    background-position: top; /* Align it to the top */
+  /* Overlay the frame exactly over the background */
+  .intrigue-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('/necromunda-frame.png');
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
+    pointer-events: none; /* allow clicking through */
+    z-index: 2;
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 1; /* ensures text appears above background but below overlay’s pointer events */
+    flex: 1;
+    padding: 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 40px;
-    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
   }
 
   .header-text {
@@ -92,15 +97,7 @@
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     text-align: center;
-    line-height: 1.2;
-  }
-
-  .card-body {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    margin-top: 8px;
   }
 
   .info-section {
@@ -161,16 +158,5 @@
     color: #000000;
     overflow-y: auto;
     flex: 1;
-  }
-
-  .card-footer {
-    width: 100%;
-    height: 50px;
-    background-image: url('/necromunda-frame.png'); /* Complete image applied */
-    background-size: cover; /* Keep the aspect ratio intact */
-    background-position: bottom; /* Align it to the bottom */
-    background-repeat: no-repeat;
-    transform: rotate(180deg);
-    flex-shrink: 0;
   }
 </style>
