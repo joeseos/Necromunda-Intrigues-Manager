@@ -1,15 +1,15 @@
 <script>
   export let intrigue;
   export let onClose;
-  
+
   const isOutlaw = intrigue.suit === 'diamonds';
-  
+
   function handleBackdropClick(e) {
     if (e.target === e.currentTarget) {
       onClose();
     }
   }
-  
+
   function handleKeydown(e) {
     if (e.key === 'Escape') {
       onClose();
@@ -19,7 +19,7 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div 
+<div
   class="modal-backdrop"
   on:click={handleBackdropClick}
   role="dialog"
@@ -27,10 +27,8 @@
   tabindex="-1"
 >
   <div class="modal-card" on:click|stopPropagation>
-    <!-- Overlay for header + footer -->
     <div class="overlay"></div>
 
-    <!-- Text content -->
     <div class="card-content">
       <!-- Header -->
       <div class="card-header">
@@ -95,17 +93,19 @@
 
   .modal-card {
     position: relative;
-    width: 912px;
-    height: 1335px;
+    width: min(90vw, 912px);
+    aspect-ratio: 912 / 1335;
     background-image: url('/necromunda-bg.png');
     background-size: cover;
     background-position: center;
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* The header+footer overlay */
+  /* Overlay (header + footer combined image) */
   .overlay {
     position: absolute;
     inset: 0;
@@ -117,7 +117,7 @@
     pointer-events: none;
   }
 
-  /* Text container on top of everything */
+  /* Text & content layer */
   .card-content {
     position: relative;
     z-index: 2;
@@ -129,7 +129,7 @@
   .card-header {
     position: relative;
     width: 100%;
-    height: 140px;
+    height: 12%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,7 +138,7 @@
   }
 
   .header-text {
-    font-size: 24px;
+    font-size: clamp(16px, 2vw, 24px);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -150,18 +150,18 @@
 
   .close-button {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 10px;
+    right: 20px;
     background: none;
     border: none;
     color: #ffffff;
-    font-size: 48px;
+    font-size: clamp(24px, 3vw, 40px);
     font-weight: bold;
     cursor: pointer;
     line-height: 1;
     padding: 0;
-    width: 48px;
-    height: 48px;
+    width: 1.5em;
+    height: 1.5em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,10 +176,10 @@
 
   .card-body {
     flex: 1;
-    padding: 40px;
+    padding: clamp(16px, 3vw, 40px);
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: clamp(10px, 2vw, 30px);
     overflow-y: auto;
   }
 
@@ -192,7 +192,7 @@
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 8px;
-    font-size: 18px;
+    font-size: clamp(12px, 1.5vw, 18px);
   }
 
   .info-label {
@@ -214,7 +214,7 @@
   .reward-text {
     color: #000000;
     font-weight: 700;
-    font-size: 18px;
+    font-size: clamp(13px, 1.8vw, 18px);
     margin-top: 4px;
   }
 
@@ -226,7 +226,7 @@
   .criteria-label,
   .notes-label {
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: clamp(10px, 1.4vw, 14px);
     font-weight: 700;
     color: #000000;
     margin-bottom: 10px;
@@ -235,7 +235,7 @@
 
   .criteria-text,
   .notes-text {
-    font-size: 15px;
+    font-size: clamp(11px, 1.5vw, 15px);
     line-height: 1.6;
     color: #000000;
   }
