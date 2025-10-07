@@ -18,6 +18,8 @@
   role="button"
   tabindex="0"
 >
+  <div class="overlay"></div>
+
   <div class="card-content">
     <div class="header-text">{intrigue.name}</div>
 
@@ -49,11 +51,12 @@
   .intrigue-card {
     position: relative;
     width: 100%;
-    aspect-ratio: 298 / 583; /* keep proportions consistent */
+    aspect-ratio: 912 / 1335;
     background-image: url('/necromunda-bg.png');
-    background-size: cover; /* ensures same scaling */
+    background-size: cover;
     background-position: center;
-    border-radius: 12px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
     overflow: hidden;
     cursor: pointer;
     display: flex;
@@ -65,54 +68,50 @@
     transform: scale(1.02);
   }
 
-  /* FRAME OVERLAY:
-     Keep the frame visually over the background but put it beneath the text */
-  .intrigue-card::after {
-    content: "";
+  /* Overlay (header + footer combined image) */
+  .overlay {
     position: absolute;
     inset: 0;
     background-image: url('/necromunda-frame.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    pointer-events: none; /* allow clicks through */
-    z-index: 1; /* lower than .card-content so text sits above the frame */
-    opacity: 1;
+    z-index: 1;
+    pointer-events: none;
   }
 
-  /* Card content must be positioned and have a higher z-index */
+  /* Text & content layer */
   .card-content {
     position: relative;
-    z-index: 2; /* TEXT ABOVE THE OVERLAY */
-    flex: 1;
-    padding: 20px;
+    z-index: 2;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 16px;
   }
 
   .header-text {
-    font-size: 14px;
+    position: relative;
+    padding-top: clamp(40px, 8%, 60px);
+    font-size: clamp(12px, 1.2vw, 14px);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     text-align: center;
-    margin-top: 8px;
+    line-height: 1.2;
   }
 
   .info-section {
-    padding: 12px 16px;
+    padding: 16px 20px;
   }
 
   .info-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 6px;
-    font-size: 12px;
+    margin-bottom: 8px;
+    font-size: clamp(8px, 1vw, 11px);
   }
 
   .info-label {
@@ -134,32 +133,26 @@
   .reward-text {
     color: #000000;
     font-weight: 700;
-    font-size: 13px;
+    font-size: clamp(9px, 1.1vw, 11px);
     margin-top: 4px;
   }
 
   .criteria-section {
-    flex: 1;
-    padding: 12px 16px;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
+    padding: 16px 20px;
   }
 
   .criteria-label {
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: clamp(7px, 0.9vw, 10px);
     font-weight: 700;
     color: #000000;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     letter-spacing: 0.05em;
   }
 
   .criteria-text {
-    font-size: 11px;
-    line-height: 1.5;
+    font-size: clamp(8px, 1vw, 11px);
+    line-height: 1.6;
     color: #000000;
-    overflow-y: auto;
-    flex: 1;
   }
 </style>
