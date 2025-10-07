@@ -19,7 +19,7 @@
 </script>
 
 <div
-  class="intrigue-card {isOutlaw ? 'outlaw' : 'law'} {isDragging ? 'card-dragging' : ''}"
+  class="intrigue-card {isDragging ? 'card-dragging' : ''}"
   draggable={draggable}
   on:dragstart={handleDragStart}
   on:click={handleClick}
@@ -27,6 +27,9 @@
   role="button"
   tabindex="0"
 >
+  <!-- Background -->
+  <div class="card-background"></div>
+  
   <!-- Header with card name -->
   <div class="card-header">
     <h3 class="card-name">{intrigue.name}</h3>
@@ -35,47 +38,41 @@
   <!-- Card content -->
   <div class="card-body">
     <!-- Value badge -->
-    <div class="value-section">
-      <div class="value-badge {isOutlaw ? 'outlaw-badge' : 'law-badge'}">
-        {intrigue.value}
-        <div class="suit-icon">
-          {#if isOutlaw}
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41l-7.59-7.59a2.41 2.41 0 0 0-3.41 0Z"/>
-            </svg>
-          {:else}
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M4 4v6.5c0 2.5 2 4.5 4.5 4.5S13 13 13 10.5V4M13 4c0 5 3 7 6 7 2 0 3-.5 3-3V4M12 15l-1 9M6 15l1 9"/>
-            </svg>
-          {/if}
-        </div>
-      </div>
+    <div class="value-badge">
+      <span class="value-number">{intrigue.value}</span>
+      <span class="value-suit">
+        {#if isOutlaw}
+          ♦
+        {:else}
+          ♠
+        {/if}
+      </span>
     </div>
 
-    <!-- Info grid -->
+    <!-- Info section -->
     <div class="info-section">
       <div class="info-row">
-        <span class="label">CATEGORY</span>
-        <span class="value {isOutlaw ? 'outlaw-text' : 'law-text'}">{intrigue.category}</span>
+        <span class="info-label">CATEGORY</span>
+        <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">{intrigue.category}</span>
       </div>
       <div class="info-row">
-        <span class="label">TEST</span>
-        <span class="value">{intrigue.alignmentTest}</span>
+        <span class="info-label">TEST</span>
+        <span class="info-value">{intrigue.alignmentTest}</span>
       </div>
-      <div class="info-row reward-row">
-        <span class="label">REWARD</span>
+      <div class="info-row">
+        <span class="info-label">REWARD</span>
       </div>
-      <div class="reward-value">{intrigue.reward}</div>
+      <div class="reward-text">{intrigue.reward}</div>
     </div>
 
     <!-- Criteria -->
     <div class="criteria-section">
-      <div class="label">CRITERIA</div>
+      <div class="criteria-label">CRITERIA</div>
       <div class="criteria-text">{intrigue.criteria}</div>
     </div>
   </div>
 
-  <!-- Footer - same image rotated 180 degrees -->
+  <!-- Footer -->
   <div class="card-footer"></div>
 </div>
 
@@ -85,43 +82,47 @@
     width: 100%;
     height: 500px;
     cursor: move;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    background: url('/necromunda-bg.png');
-    background-size: cover;
-    background-position: center;
-    border-radius: 0;
+    transition: transform 0.2s ease;
     overflow: hidden;
   }
 
   .intrigue-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9);
+    transform: scale(1.02);
   }
 
   .card-dragging {
     opacity: 0.5;
-    transform: scale(0.95);
+  }
+
+  .card-background {
+    position: absolute;
+    inset: 0;
+    background: url('/necromunda-bg.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
   }
 
   .card-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 60px;
-    background: url('/necromunda-frame.png') top center;
+    background: url('/necromunda-frame.png') top center no-repeat;
     background-size: 100% auto;
-    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
-    flex-shrink: 0;
+    padding: 0 60px;
+    z-index: 2;
   }
 
   .card-name {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     text-align: center;
@@ -130,122 +131,118 @@
   }
 
   .card-body {
-    flex: 1;
-    padding: 16px;
+    position: absolute;
+    top: 60px;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.4) 100%);
-  }
-
-  .value-section {
-    display: flex;
-    justify-content: center;
+    gap: 16px;
+    z-index: 1;
   }
 
   .value-badge {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 32px;
+    padding: 12px;
+    background: rgba(139, 0, 0, 0.85);
+    border: 2px solid #8B0000;
+    width: fit-content;
+    align-self: center;
+  }
+
+  .value-number {
+    font-size: 40px;
     font-weight: 900;
-    font-family: serif;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
-    border: 2px solid;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    line-height: 1;
   }
 
-  .outlaw-badge {
-    background: rgba(127, 29, 29, 0.9);
-    border-color: #dc2626;
-    color: #fecaca;
-  }
-
-  .law-badge {
-    background: rgba(31, 41, 55, 0.9);
-    border-color: #6b7280;
-    color: #e5e7eb;
-  }
-
-  .suit-icon {
-    display: flex;
-    align-items: center;
+  .value-suit {
+    font-size: 32px;
+    color: #ffffff;
+    line-height: 1;
   }
 
   .info-section {
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    padding: 12px;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.3);
   }
 
   .info-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    font-size: 11px;
+    align-items: baseline;
+    margin-bottom: 6px;
+    font-size: 12px;
   }
 
-  .reward-row {
-    margin-bottom: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .label {
+  .info-label {
     text-transform: uppercase;
     font-weight: 700;
-    color: #9ca3af;
+    color: #000000;
     letter-spacing: 0.05em;
   }
 
-  .value {
-    color: #e5e7eb;
+  .info-value {
     font-weight: 600;
+    color: #000000;
   }
 
   .outlaw-text {
-    color: #fca5a5;
+    color: #8B0000;
   }
 
-  .law-text {
-    color: #d1d5db;
-  }
-
-  .reward-value {
-    color: #fde047;
+  .reward-text {
+    color: #000000;
     font-weight: 700;
     font-size: 13px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
-    padding: 0 12px;
+    margin-top: 4px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
   }
 
   .criteria-section {
     flex: 1;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    padding: 12px;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+  }
+
+  .criteria-label {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
   }
 
   .criteria-text {
     font-size: 11px;
     line-height: 1.5;
-    color: #d1d5db;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    margin-top: 4px;
+    color: #000000;
+    overflow-y: auto;
   }
 
   .card-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 40px;
-    background: url('/necromunda-frame.png') bottom center;
+    background: url('/necromunda-frame.png') bottom center no-repeat;
     background-size: 100% auto;
-    background-repeat: no-repeat;
-    flex-shrink: 0;
     transform: rotate(180deg);
+    z-index: 2;
   }
 </style>
