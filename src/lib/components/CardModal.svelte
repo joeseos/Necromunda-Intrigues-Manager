@@ -27,46 +27,55 @@
   tabindex="-1"
 >
   <div class="modal-card" on:click|stopPropagation>
-    <button
-      on:click={onClose}
-      class="close-button"
-      aria-label="Close"
-      type="button"
-    >
-      ×
-    </button>
+    <!-- Overlay for header + footer -->
+    <div class="overlay"></div>
 
+    <!-- Text content -->
     <div class="card-content">
-      <div class="header-text">{intrigue.name}</div>
-
-      <div class="info-section">
-        <div class="info-row">
-          <span class="info-label">CATEGORY</span>
-          <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
-            {intrigue.category}
-          </span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">TEST</span>
-          <span class="info-value">{intrigue.alignmentTest}</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">REWARD</span>
-        </div>
-        <div class="reward-text">{intrigue.reward}</div>
+      <!-- Header -->
+      <div class="card-header">
+        <div class="header-text">{intrigue.name}</div>
+        <button
+          on:click={onClose}
+          class="close-button"
+          aria-label="Close"
+          type="button"
+        >
+          ×
+        </button>
       </div>
 
-      <div class="criteria-section">
-        <div class="criteria-label">CRITERIA</div>
-        <div class="criteria-text">{intrigue.criteria}</div>
-      </div>
-
-      {#if intrigue.notes}
-        <div class="notes-section">
-          <div class="notes-label">NOTES</div>
-          <div class="notes-text">{intrigue.notes}</div>
+      <!-- Body -->
+      <div class="card-body">
+        <div class="info-section">
+          <div class="info-row">
+            <span class="info-label">CATEGORY</span>
+            <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
+              {intrigue.category}
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">TEST</span>
+            <span class="info-value">{intrigue.alignmentTest}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">REWARD</span>
+          </div>
+          <div class="reward-text">{intrigue.reward}</div>
         </div>
-      {/if}
+
+        <div class="criteria-section">
+          <div class="criteria-label">CRITERIA</div>
+          <div class="criteria-text">{intrigue.criteria}</div>
+        </div>
+
+        {#if intrigue.notes}
+          <div class="notes-section">
+            <div class="notes-label">NOTES</div>
+            <div class="notes-text">{intrigue.notes}</div>
+          </div>
+        {/if}
+      </div>
     </div>
   </div>
 </div>
@@ -86,78 +95,96 @@
 
   .modal-card {
     position: relative;
-    width: 100%;
-    max-width: 500px;
-    aspect-ratio: 298 / 583;
+    width: 912px;
+    height: 1335px;
     background-image: url('/necromunda-bg.png');
     background-size: cover;
     background-position: center;
-    border-radius: 12px;
+    border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
   }
 
-  /* Frame overlay identical to the small card */
-  .modal-card::after {
-    content: "";
+  /* The header+footer overlay */
+  .overlay {
     position: absolute;
     inset: 0;
     background-image: url('/necromunda-frame.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 1;
     pointer-events: none;
-    z-index: 1; /* sits below the text */
   }
 
+  /* Text container on top of everything */
   .card-content {
     position: relative;
-    z-index: 2; /* above the overlay */
-    flex: 1;
-    padding: 32px 28px;
+    z-index: 2;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+  }
+
+  .card-header {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 60px;
+    flex-shrink: 0;
   }
 
   .header-text {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     text-align: center;
-    margin-bottom: 12px;
+    line-height: 1.2;
   }
 
   .close-button {
     position: absolute;
-    top: 12px;
-    right: 18px;
+    top: 20px;
+    right: 30px;
     background: none;
     border: none;
     color: #ffffff;
-    font-size: 36px;
+    font-size: 48px;
     font-weight: bold;
     cursor: pointer;
     line-height: 1;
+    padding: 0;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-    z-index: 3; /* stays above everything */
+    z-index: 10;
   }
 
   .close-button:hover {
     transform: scale(1.2);
   }
 
+  .card-body {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow-y: auto;
+  }
+
   .info-section {
-    padding: 12px 16px;
+    padding: 16px 20px;
   }
 
   .info-row {
@@ -165,7 +192,7 @@
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .info-label {
@@ -187,7 +214,7 @@
   .reward-text {
     color: #000000;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 18px;
     margin-top: 4px;
   }
 
@@ -199,7 +226,7 @@
   .criteria-label,
   .notes-label {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     color: #000000;
     margin-bottom: 10px;
@@ -208,7 +235,7 @@
 
   .criteria-text,
   .notes-text {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.6;
     color: #000000;
   }
