@@ -65,7 +65,8 @@
     transform: scale(1.02);
   }
 
-  /* Overlay the frame exactly over the background */
+  /* FRAME OVERLAY:
+     Keep the frame visually over the background but put it beneath the text */
   .intrigue-card::after {
     content: "";
     position: absolute;
@@ -74,13 +75,15 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    pointer-events: none; /* allow clicking through */
-    z-index: 2;
+    pointer-events: none; /* allow clicks through */
+    z-index: 1; /* lower than .card-content so text sits above the frame */
+    opacity: 1;
   }
 
+  /* Card content must be positioned and have a higher z-index */
   .card-content {
     position: relative;
-    z-index: 1; /* ensures text appears above background but below overlay’s pointer events */
+    z-index: 2; /* TEXT ABOVE THE OVERLAY */
     flex: 1;
     padding: 20px;
     display: flex;
