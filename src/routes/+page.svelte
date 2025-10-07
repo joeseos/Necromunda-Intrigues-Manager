@@ -72,9 +72,6 @@
     : availableCards.filter(c => 
         filter === 'outlaw' ? c.category === 'Outlaw' : c.category === 'Law Abiding'
       );
-      
-  $: console.log('Available cards:', availableCards.length);
-  $: console.log('Filtered available:', filteredAvailable.length);
 </script>
 
 <svelte:head>
@@ -132,6 +129,17 @@
 
     <div class="mb-8">
       <FilterBar currentFilter={filter} onFilterChange={handleFilterChange} />
+    </div>
+
+    <!-- DEBUG INFO - Remove after fixing -->
+    <div class="bg-red-900 text-white p-4 mb-4 rounded">
+      <p class="font-bold mb-2">DEBUG INFO:</p>
+      <p>Total intrigues imported: {intrigues.length}</p>
+      <p>Available cards: {availableCards.length}</p>
+      <p>Filtered available: {filteredAvailable.length}</p>
+      <p>Filter: {filter}</p>
+      <p>First card: {filteredAvailable[0]?.name || 'None'}</p>
+      <p>First card ID: {filteredAvailable[0]?.id || 'None'}</p>
     </div>
 
     {#if justDrawnCards.length > 0}
