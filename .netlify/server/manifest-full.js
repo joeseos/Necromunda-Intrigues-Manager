@@ -10,7 +10,7 @@ return {
 	assets: new Set(["necromunda-bg.png","necromunda-frame.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.QS4Cxe_N.js",app:"_app/immutable/entry/app.BUijHUkt.js",imports:["_app/immutable/entry/start.QS4Cxe_N.js","_app/immutable/chunks/DIZZuRiV.js","_app/immutable/chunks/CAYq3aLb.js","_app/immutable/chunks/DNgd5NhE.js","_app/immutable/entry/app.BUijHUkt.js","_app/immutable/chunks/DNgd5NhE.js","_app/immutable/chunks/CAYq3aLb.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/DFAwZzEG.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.DVqRnn2Y.js",app:"_app/immutable/entry/app.BzcWoS6W.js",imports:["_app/immutable/entry/start.DVqRnn2Y.js","_app/immutable/chunks/BK-WkNY3.js","_app/immutable/chunks/CAYq3aLb.js","_app/immutable/chunks/DNgd5NhE.js","_app/immutable/entry/app.BzcWoS6W.js","_app/immutable/chunks/DNgd5NhE.js","_app/immutable/chunks/CAYq3aLb.js","_app/immutable/chunks/CWj6FrbW.js","_app/immutable/chunks/DFAwZzEG.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
