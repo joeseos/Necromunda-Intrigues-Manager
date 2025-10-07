@@ -131,17 +131,6 @@
       <FilterBar currentFilter={filter} onFilterChange={handleFilterChange} />
     </div>
 
-    <!-- DEBUG INFO - Remove after fixing -->
-    <div class="bg-red-900 text-white p-4 mb-4 rounded">
-      <p class="font-bold mb-2">DEBUG INFO:</p>
-      <p>Total intrigues imported: {intrigues.length}</p>
-      <p>Available cards: {availableCards.length}</p>
-      <p>Filtered available: {filteredAvailable.length}</p>
-      <p>Filter: {filter}</p>
-      <p>First card: {filteredAvailable[0]?.name || 'None'}</p>
-      <p>First card ID: {filteredAvailable[0]?.id || 'None'}</p>
-    </div>
-
     {#if justDrawnCards.length > 0}
       <div class="mb-8 animate-fade-in">
         <div class="bg-gradient-to-r from-yellow-900 via-yellow-800 to-yellow-900 rounded-xl p-6 border-4 border-yellow-500 shadow-2xl">
