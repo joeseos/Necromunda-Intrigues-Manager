@@ -174,10 +174,26 @@
       {/if}
     </div>
 
-<footer class="text-center text-gray-500 text-xs md:text-sm mt-8 space-y-2">
-  <p>Click cards for full details</p>
-  <p class="text-gray-600">Built for Necromunda tabletop gaming</p>
-  <p>
+<footer class="text-center text-gray-500 text-xs md:text-sm mt-8 space-y-3">
+  <!-- Buy Me a Coffee -->
+  <div class="mt-4">
+    <p class="text-xs text-gray-500 mb-3">Enjoying this tool? Consider supporting its development:</p>
+    <a 
+      href="https://buymeacoffee.com/mundamanager" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="inline-block hover:opacity-80 transition-opacity"
+    >
+      <img 
+        src="https://cdn.buymeacoffee.com/buttons/v2/default-orange.png" 
+        alt="Buy Me A Coffee" 
+        class="h-12 w-auto mx-auto"
+      />
+    </a>
+  </div>
+  
+  <!-- GitHub Link -->
+  <div class="mt-4">
     <a 
       href="https://github.com/joeseos/Necromunda-Intrigues-Manager" 
       target="_blank" 
@@ -189,7 +205,7 @@
       </svg>
       GitHub Repository
     </a>
-  </p>
+  </div>
 </footer>
   </div>
 </div>
