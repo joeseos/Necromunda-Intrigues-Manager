@@ -1,103 +1,75 @@
 <script>
   export let intrigue;
-  export let onClose;
   
   const isOutlaw = intrigue.suit === 'diamonds';
   
-  function handleBackdropClick(e) {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+  function handleClick() {
+    const event = new CustomEvent('cardclick', {
+      detail: intrigue
+    });
+    document.dispatchEvent(event);
   }
 </script>
 
-<div 
-  class="modal-backdrop"
-  on:click={handleBackdropClick}
-  on:keydown={(e) => e.key === 'Escape' && onClose()}
-  role="dialog"
-  aria-modal="true"
+<div
+  class="intrigue-card"
+  on:click={handleClick}
+  on:keypress={(e) => e.key === 'Enter' && handleClick()}
+  role="button"
+  tabindex="0"
 >
-  <div class="modal-card" on:click|stopPropagation>
-    <!-- Header -->
-    <div class="card-header">
-      <div class="header-text">{intrigue.name}</div>
-      <button
-        on:click={onClose}
-        class="close-button"
-        aria-label="Close"
-      >
-        ×
-      </button>
-    </div>
-
-    <!-- Body Content -->
-    <div class="card-body">
-      <div class="info-section">
-        <div class="info-row">
-          <span class="info-label">CATEGORY</span>
-          <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">{intrigue.category}</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">TEST</span>
-          <span class="info-value">{intrigue.alignmentTest}</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">REWARD</span>
-        </div>
-        <div class="reward-text">{intrigue.reward}</div>
-      </div>
-
-      <div class="criteria-section">
-        <div class="criteria-label">CRITERIA</div>
-        <div class="criteria-text">{intrigue.criteria}</div>
-      </div>
-
-      {#if intrigue.notes}
-        <div class="notes-section">
-          <div class="notes-label">NOTES</div>
-          <div class="notes-text">{intrigue.notes}</div>
-        </div>
-      {/if}
-    </div>
-
-    <!-- Footer -->
-    <div class="card-footer"></div>
+  <div class="card-header">
+    <div class="header-text">{intrigue.name}</div>
   </div>
+
+  <div class="card-body">
+    <div class="info-section">
+      <div class="info-row">
+        <span class="info-label">CATEGORY</span>
+        <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">{intrigue.category}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">TEST</span>
+        <span class="info-value">{intrigue.alignmentTest}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">REWARD</span>
+      </div>
+      <div class="reward-text">{intrigue.reward}</div>
+    </div>
+
+    <div class="criteria-section">
+      <div class="criteria-label">CRITERIA</div>
+      <div class="criteria-text">{intrigue.criteria}</div>
+    </div>
+  </div>
+
+  <div class="card-footer"></div>
 </div>
 
 <style>
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 1000;
-    backdrop-filter: blur(4px);
-  }
-
-  .modal-card {
+  .intrigue-card {
     position: relative;
     width: 100%;
-    max-width: 500px;
-    min-height: 700px;
+    min-height: 580px;
+    cursor: pointer;
     background-image: url('/necromunda-bg.png');
     background-size: cover;
     background-position: center;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    transition: transform 0.2s ease;
     border-radius: 12px;
     overflow: hidden;
   }
 
+  .intrigue-card:hover {
+    transform: scale(1.02);
+  }
+
   .card-header {
-    position: relative;
     width: 100%;
-    height: 80px;
+    height: 70px;
     background-image: url('/necromunda-frame.png');
     background-size: auto 100%;
     background-position: center;
@@ -105,12 +77,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 60px;
+    padding: 0 40px;
     flex-shrink: 0;
   }
 
   .header-text {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -120,50 +92,24 @@
     line-height: 1.2;
   }
 
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-  }
-
-  .close-button:hover {
-    transform: scale(1.2);
-  }
-
   .card-body {
     flex: 1;
-    padding: 24px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    overflow-y: auto;
+    gap: 16px;
   }
 
   .info-section {
-    padding: 16px 20px;
+    padding: 12px 16px;
   }
 
   .info-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 8px;
-    font-size: 14px;
+    margin-bottom: 6px;
+    font-size: 12px;
   }
 
   .info-label {
@@ -185,39 +131,38 @@
   .reward-text {
     color: #000000;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 13px;
     margin-top: 4px;
   }
 
-  .criteria-section,
-  .notes-section {
-    padding: 16px 20px;
+  .criteria-section {
+    flex: 1;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 
-  .criteria-label,
-  .notes-label {
+  .criteria-label {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     color: #000000;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     letter-spacing: 0.05em;
   }
 
-  .criteria-text,
-  .notes-text {
-    font-size: 13px;
-    line-height: 1.6;
+  .criteria-text {
+    font-size: 11px;
+    line-height: 1.5;
     color: #000000;
-  }
-
-  .notes-text {
-    font-style: italic;
+    overflow-y: auto;
+    flex: 1;
   }
 
   .card-footer {
     width: 100%;
-    height: 60px;
+    height: 50px;
     background-image: url('/necromunda-frame.png');
     background-size: auto 100%;
     background-position: center;
