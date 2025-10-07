@@ -18,10 +18,12 @@
   role="button"
   tabindex="0"
 >
+  <!-- Header -->
   <div class="card-header">
     <div class="header-text">{intrigue.name}</div>
   </div>
 
+  <!-- Body Content -->
   <div class="card-body">
     <div class="info-section">
       <div class="info-row">
@@ -44,6 +46,7 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <div class="card-footer"></div>
 </div>
 
@@ -71,7 +74,7 @@
     width: 100%;
     height: 70px;
     background-image: url('/necromunda-frame.png');
-    background-size: auto 100%;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -164,7 +167,7 @@
     width: 100%;
     height: 50px;
     background-image: url('/necromunda-frame.png');
-    background-size: auto 100%;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     transform: rotate(180deg);
