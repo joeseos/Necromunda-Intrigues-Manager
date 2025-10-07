@@ -15,24 +15,32 @@
       onClose();
     }
   }
+
+
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
 
 <div
   class="modal-backdrop"
-  on:click={handleBackdropClick}
   role="dialog"
   aria-modal="true"
+  aria-labelledby="modal-title"
   tabindex="-1"
 >
-  <div class="modal-card" on:click|stopPropagation>
+  <button
+    class="backdrop-button"
+    on:click={handleBackdropClick}
+    aria-label="Close modal"
+    type="button"
+  ></button>
+  <div class="modal-card" on:click|stopPropagation role="none">
     <div class="overlay"></div>
 
     <div class="card-content">
       <!-- Header -->
       <div class="card-header">
-        <div class="header-text">{intrigue.name}</div>
+        <div class="header-text" id="modal-title">{intrigue.name}</div>
         <button
           on:click={onClose}
           class="close-button"
@@ -91,10 +99,21 @@
     backdrop-filter: blur(4px);
   }
 
+  .backdrop-button {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: default;
+    z-index: 1;
+  }
+
   .modal-card {
     position: relative;
-    width: min(90vw, 912px);
+    width: min(80vw, 450px);
     aspect-ratio: 912 / 1335;
+    max-height: 85vh;
     background-image: url('/necromunda-bg.png');
     background-size: cover;
     background-position: center;
@@ -104,6 +123,7 @@
     display: flex;
     flex-direction: column;
   }
+
 
   /* Overlay (header + footer combined image) */
   .overlay {
@@ -138,6 +158,10 @@
   }
 
   .header-text {
+    position: absolute;
+    left: 50%;
+    top: 85%;
+    transform: translate(-50%, -50%);
     font-size: clamp(16px, 2vw, 24px);
     font-weight: 900;
     text-transform: uppercase;
@@ -146,12 +170,14 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     text-align: center;
     line-height: 1.2;
+    white-space: nowrap;
   }
+
 
   .close-button {
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: -10px;
+    right: -10px;
     background: none;
     border: none;
     color: #ffffff;
