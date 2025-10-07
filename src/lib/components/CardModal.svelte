@@ -27,6 +27,7 @@
   tabindex="-1"
 >
   <div class="modal-card" on:click|stopPropagation>
+    <!-- Header -->
     <div class="card-header">
       <div class="header-text">{intrigue.name}</div>
       <button
@@ -39,6 +40,7 @@
       </button>
     </div>
 
+    <!-- Body Content -->
     <div class="card-body">
       <div class="info-section">
         <div class="info-row">
@@ -68,6 +70,7 @@
       {/if}
     </div>
 
+    <!-- Footer -->
     <div class="card-footer"></div>
   </div>
 </div>
@@ -105,7 +108,7 @@
     width: 100%;
     height: 80px;
     background-image: url('/necromunda-frame.png');
-    background-size: auto 100%;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -226,7 +229,7 @@
     width: 100%;
     height: 60px;
     background-image: url('/necromunda-frame.png');
-    background-size: auto 100%;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     transform: rotate(180deg);
