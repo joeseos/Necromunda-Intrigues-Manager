@@ -21,28 +21,32 @@
   <div class="overlay"></div>
 
   <div class="card-content">
-    <div class="header-text">{intrigue.name}</div>
-
-    <div class="info-section">
-      <div class="info-row">
-        <span class="info-label">CATEGORY</span>
-        <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
-          {intrigue.category}
-        </span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">TEST</span>
-        <span class="info-value">{intrigue.alignmentTest}</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">REWARD</span>
-      </div>
-      <div class="reward-text">{intrigue.reward}</div>
+    <div class="header-section">
+      <div class="header-text">{intrigue.name}</div>
     </div>
 
-    <div class="criteria-section">
-      <div class="criteria-label">CRITERIA</div>
-      <div class="criteria-text">{intrigue.criteria}</div>
+    <div class="body-section">
+      <div class="info-section">
+        <div class="info-row">
+          <span class="info-label">CATEGORY</span>
+          <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
+            {intrigue.category}
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">TEST</span>
+          <span class="info-value">{intrigue.alignmentTest}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">REWARD</span>
+        </div>
+        <div class="reward-text">{intrigue.reward}</div>
+      </div>
+
+      <div class="criteria-section">
+        <div class="criteria-label">CRITERIA</div>
+        <div class="criteria-text">{intrigue.criteria}</div>
+      </div>
     </div>
   </div>
 </div>
@@ -68,7 +72,6 @@
     transform: scale(1.02);
   }
 
-  /* Overlay (header + footer combined image) */
   .overlay {
     position: absolute;
     inset: 0;
@@ -80,38 +83,63 @@
     pointer-events: none;
   }
 
-  /* Text & content layer */
   .card-content {
     position: relative;
     z-index: 2;
     height: 100%;
     display: flex;
     flex-direction: column;
+    font-family: 'Rodchenko', sans-serif;
+  }
+
+  .header-section {
+    position: relative;
+    height: 14%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
   .header-text {
-    position: relative;
-    padding-top: clamp(40px, 8%, 60px);
-    font-size: clamp(12px, 1.2vw, 14px);
+    position: absolute;
+    left: 50%;
+    top: 68%;
+    transform: translate(-50%, -50%);
+    font-family: 'Lithos Black', sans-serif;
+    font-size: clamp(9px, 1.2vw, 13px);
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     text-align: center;
     line-height: 1.2;
+    white-space: nowrap;
+    max-width: 80%;
+    overflow: visible;
+  }
+
+  .body-section {
+    flex: 1;
+    padding: clamp(10px, 2vh, 16px) clamp(16px, 3vw, 24px) clamp(35px, 6vh, 60px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1.5vh, 12px);
+    overflow: hidden;
   }
 
   .info-section {
-    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3px, 0.6vh, 6px);
   }
 
   .info-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 8px;
-    font-size: clamp(8px, 1vw, 11px);
+    font-size: clamp(7px, 0.9vw, 10px);
   }
 
   .info-label {
@@ -128,31 +156,33 @@
 
   .outlaw-text {
     color: #8B0000;
+    font-weight: 700;
   }
 
   .reward-text {
     color: #000000;
     font-weight: 700;
-    font-size: clamp(9px, 1.1vw, 11px);
-    margin-top: 4px;
+    font-size: clamp(7px, 0.95vw, 10px);
+    margin-top: 2px;
   }
 
   .criteria-section {
-    padding: 16px 20px;
+    margin-top: clamp(4px, 0.8vh, 8px);
   }
 
   .criteria-label {
     text-transform: uppercase;
-    font-size: clamp(7px, 0.9vw, 10px);
+    font-size: clamp(6px, 0.85vw, 9px);
     font-weight: 700;
     color: #000000;
-    margin-bottom: 10px;
+    margin-bottom: clamp(4px, 0.8vh, 8px);
     letter-spacing: 0.05em;
   }
 
   .criteria-text {
-    font-size: clamp(8px, 1vw, 11px);
-    line-height: 1.6;
+    font-size: clamp(6px, 0.8vw, 9px);
+    line-height: 1.4;
     color: #000000;
+    font-weight: 400;
   }
 </style>
