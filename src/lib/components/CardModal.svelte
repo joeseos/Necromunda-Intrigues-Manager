@@ -11,12 +11,10 @@
   }
 
   function handleKeydown(e) {
-    if (e.key === 'Escape') {
+    if (key === 'Escape') {
       onClose();
     }
   }
-
-
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -53,31 +51,35 @@
 
       <!-- Body -->
       <div class="card-body">
+        <!-- Description (if available) -->
+        {#if intrigue.description}
+          <div class="description-text">{intrigue.description}</div>
+        {/if}
+
         <div class="info-section">
           <div class="info-row">
-            <span class="info-label">CATEGORY</span>
+            <span class="info-label">Category:</span>
             <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
               {intrigue.category}
             </span>
           </div>
           <div class="info-row">
-            <span class="info-label">TEST</span>
+            <span class="info-label">Alignment Test:</span>
             <span class="info-value">{intrigue.alignmentTest}</span>
           </div>
           <div class="info-row">
-            <span class="info-label">REWARD</span>
+            <span class="info-label">Reward:</span>
+            <span class="info-value">{intrigue.reward}</span>
           </div>
-          <div class="reward-text">{intrigue.reward}</div>
         </div>
 
         <div class="criteria-section">
-          <div class="criteria-label">CRITERIA</div>
+          <div class="criteria-label">Criteria:</div>
           <div class="criteria-text">{intrigue.criteria}</div>
         </div>
 
         {#if intrigue.notes}
           <div class="notes-section">
-            <div class="notes-label">NOTES</div>
             <div class="notes-text">{intrigue.notes}</div>
           </div>
         {/if}
@@ -124,8 +126,6 @@
     flex-direction: column;
   }
 
-
-  /* Overlay (header + footer combined image) */
   .overlay {
     position: absolute;
     inset: 0;
@@ -137,7 +137,6 @@
     pointer-events: none;
   }
 
-  /* Text & content layer */
   .card-content {
     position: relative;
     z-index: 2;
@@ -149,7 +148,7 @@
   .card-header {
     position: relative;
     width: 100%;
-    height: 12%;
+    height: 13%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,19 +159,19 @@
   .header-text {
     position: absolute;
     left: 50%;
-    top: 85%;
+    top: 50%;
     transform: translate(-50%, -50%);
-    font-size: clamp(16px, 2vw, 24px);
+    font-size: clamp(18px, 2.2vw, 28px);
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
     text-align: center;
     line-height: 1.2;
     white-space: nowrap;
+    max-width: 90%;
   }
-
 
   .close-button {
     position: absolute;
@@ -202,71 +201,77 @@
 
   .card-body {
     flex: 1;
-    padding: clamp(16px, 3vw, 40px);
+    padding: clamp(20px, 3.5vw, 45px) clamp(20px, 4vw, 50px);
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 2vw, 30px);
+    gap: clamp(14px, 2.5vw, 24px);
     overflow-y: auto;
   }
 
+  .description-text {
+    text-align: center;
+    font-size: clamp(13px, 1.6vw, 17px);
+    line-height: 1.5;
+    color: #000000;
+    font-weight: 500;
+    margin-bottom: clamp(8px, 1.5vw, 12px);
+  }
+
   .info-section {
-    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6px, 1vw, 10px);
   }
 
   .info-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: baseline;
-    margin-bottom: 8px;
-    font-size: clamp(12px, 1.5vw, 18px);
+    gap: clamp(8px, 1.5vw, 12px);
+    font-size: clamp(13px, 1.6vw, 18px);
   }
 
   .info-label {
-    text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 600;
     color: #000000;
-    letter-spacing: 0.05em;
   }
 
   .info-value {
-    font-weight: 600;
+    font-weight: 700;
     color: #000000;
   }
 
   .outlaw-text {
     color: #8B0000;
-  }
-
-  .reward-text {
-    color: #000000;
     font-weight: 700;
-    font-size: clamp(13px, 1.8vw, 18px);
-    margin-top: 4px;
   }
 
-  .criteria-section,
-  .notes-section {
-    padding: 16px 20px;
+  .criteria-section {
+    margin-top: clamp(8px, 1.5vw, 14px);
   }
 
-  .criteria-label,
-  .notes-label {
-    text-transform: uppercase;
-    font-size: clamp(10px, 1.4vw, 14px);
+  .criteria-label {
+    font-size: clamp(13px, 1.6vw, 18px);
     font-weight: 700;
     color: #000000;
-    margin-bottom: 10px;
-    letter-spacing: 0.05em;
+    margin-bottom: clamp(8px, 1.2vw, 12px);
   }
 
-  .criteria-text,
-  .notes-text {
-    font-size: clamp(11px, 1.5vw, 15px);
+  .criteria-text {
+    font-size: clamp(12px, 1.5vw, 16px);
     line-height: 1.6;
     color: #000000;
+    font-weight: 500;
+  }
+
+  .notes-section {
+    margin-top: clamp(10px, 1.8vw, 16px);
   }
 
   .notes-text {
-    font-style: italic;
+    font-size: clamp(12px, 1.5vw, 16px);
+    line-height: 1.6;
+    color: #000000;
+    font-weight: 500;
   }
 </style>
