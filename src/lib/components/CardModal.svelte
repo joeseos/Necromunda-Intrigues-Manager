@@ -148,7 +148,7 @@
   .card-header {
     position: relative;
     width: 100%;
-    height: 11.5%;
+    height: 14%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,7 +159,7 @@
   .header-text {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 60%;
     transform: translate(-50%, -50%);
     font-family: 'Lithos Black', sans-serif;
     font-size: clamp(16px, 2vw, 24px);
@@ -203,8 +203,8 @@
 
   .card-body {
     flex: 1;
-    /* Padding to stay within frame borders - top padding smaller, bottom padding larger */
-    padding: clamp(12px, 2vh, 20px) clamp(24px, 4vw, 50px) clamp(50px, 7vh, 85px);
+    /* Increased top padding to create space after the header banner */
+    padding: clamp(20px, 3vh, 30px) clamp(24px, 4vw, 50px) clamp(50px, 7vh, 85px);
     
     display: flex;
     flex-direction: column;
