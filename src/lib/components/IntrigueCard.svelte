@@ -104,7 +104,7 @@
   .header-text {
     position: absolute;
     left: 50%;
-    top: 68%;
+    top: 80%;
     transform: translate(-50%, -50%);
     font-family: 'Lithos Black', sans-serif;
     font-size: clamp(9px, 1.2vw, 13px);
