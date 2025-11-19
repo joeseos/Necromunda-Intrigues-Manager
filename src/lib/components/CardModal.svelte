@@ -156,23 +156,24 @@
     flex-shrink: 0;
   }
 
-  .header-text {
-    position: absolute;
-    left: 50%;
-    top: 80%;
-    transform: translate(-50%, -50%);
-    font-family: 'Lithos Black', sans-serif;
-    font-size: clamp(16px, 2vw, 24px);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #ffffff;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
-    text-align: center;
-    line-height: 1.2;
-    white-space: nowrap;
-    max-width: 90%;
-  }
+.header-text {
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  font-family: 'Lithos Black', sans-serif;
+  font-size: clamp(11px, 1.5vw, 18px);  /* Smaller to fit longer titles */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;  /* Minimal letter spacing */
+  color: #ffffff;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;  /* Single line only */
+  max-width: 80%;  /* Stay within the banner borders */
+  overflow: visible;  /* Allow it to show */
+}
 
   .close-button {
     position: absolute;
