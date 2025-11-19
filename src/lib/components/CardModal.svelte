@@ -11,7 +11,7 @@
   }
 
   function handleKeydown(e) {
-    if (key === 'Escape') {
+    if (e.key === 'Escape') {
       onClose();
     }
   }
@@ -64,7 +64,7 @@
             </span>
           </div>
           <div class="info-row">
-            <span class="info-label">Alignment Test:</span>
+            <span class="info-label">Test:</span>
             <span class="info-value">{intrigue.alignmentTest}</span>
           </div>
           <div class="info-row">
@@ -148,7 +148,7 @@
   .card-header {
     position: relative;
     width: 100%;
-    height: 13%;
+    height: 11.5%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -161,7 +161,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: clamp(18px, 2.2vw, 28px);
+    font-family: 'Lithos Black', sans-serif;
+    font-size: clamp(16px, 2vw, 24px);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -180,6 +181,7 @@
     background: none;
     border: none;
     color: #ffffff;
+    font-family: 'Lithos Black', sans-serif;
     font-size: clamp(24px, 3vw, 40px);
     font-weight: bold;
     cursor: pointer;
@@ -201,39 +203,46 @@
 
   .card-body {
     flex: 1;
-    padding: clamp(20px, 3.5vw, 45px) clamp(20px, 4vw, 50px);
+    /* Padding to stay within frame borders - top padding smaller, bottom padding larger */
+    padding: clamp(12px, 2vh, 20px) clamp(24px, 4vw, 50px) clamp(50px, 7vh, 85px);
+    
     display: flex;
     flex-direction: column;
-    gap: clamp(14px, 2.5vw, 24px);
-    overflow-y: auto;
+    gap: clamp(10px, 1.5vh, 16px);
+    
+    /* No scrolling - content must fit */
+    overflow: hidden;
+    
+    font-family: 'Rodchenko', sans-serif;
   }
 
   .description-text {
     text-align: center;
-    font-size: clamp(13px, 1.6vw, 17px);
-    line-height: 1.5;
+    font-size: clamp(11px, 1.3vw, 14px);
+    line-height: 1.4;
     color: #000000;
     font-weight: 500;
-    margin-bottom: clamp(8px, 1.5vw, 12px);
+    margin-bottom: clamp(4px, 0.8vh, 8px);
   }
 
   .info-section {
     display: flex;
     flex-direction: column;
-    gap: clamp(6px, 1vw, 10px);
+    gap: clamp(4px, 0.8vh, 8px);
   }
 
   .info-row {
     display: flex;
     justify-content: flex-start;
     align-items: baseline;
-    gap: clamp(8px, 1.5vw, 12px);
-    font-size: clamp(13px, 1.6vw, 18px);
+    gap: clamp(6px, 1vw, 10px);
+    font-size: clamp(11px, 1.3vw, 14px);
   }
 
   .info-label {
     font-weight: 600;
     color: #000000;
+    text-transform: uppercase;
   }
 
   .info-value {
@@ -247,31 +256,33 @@
   }
 
   .criteria-section {
-    margin-top: clamp(8px, 1.5vw, 14px);
+    margin-top: clamp(6px, 1vh, 10px);
   }
 
   .criteria-label {
-    font-size: clamp(13px, 1.6vw, 18px);
+    font-size: clamp(11px, 1.3vw, 14px);
     font-weight: 700;
     color: #000000;
-    margin-bottom: clamp(8px, 1.2vw, 12px);
+    margin-bottom: clamp(6px, 1vh, 10px);
+    text-transform: uppercase;
   }
 
   .criteria-text {
-    font-size: clamp(12px, 1.5vw, 16px);
-    line-height: 1.6;
+    font-size: clamp(10px, 1.2vw, 13px);
+    line-height: 1.5;
     color: #000000;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .notes-section {
-    margin-top: clamp(10px, 1.8vw, 16px);
+    margin-top: clamp(6px, 1vh, 10px);
   }
 
   .notes-text {
-    font-size: clamp(12px, 1.5vw, 16px);
-    line-height: 1.6;
+    font-size: clamp(10px, 1.2vw, 13px);
+    line-height: 1.5;
     color: #000000;
-    font-weight: 500;
+    font-weight: 400;
+    font-style: italic;
   }
 </style>
