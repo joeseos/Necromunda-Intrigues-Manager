@@ -131,20 +131,20 @@
     z-index: 1;
   }
 
-  .modal-card {
-    position: relative;
-    width: min(80vw, 450px);
-    aspect-ratio: 912 / 1335;
-    max-height: 85vh;
-    background-image: url('/necromunda-bg.png');
-    background-size: cover;
-    background-position: center;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
+.modal-card {
+  position: relative;
+  width: min(500px, 90vw);
+  aspect-ratio: 912 / 1335;
+  max-height: 90vh;
+  background-image: url('/necromunda-bg.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 
   .overlay {
     position: absolute;
