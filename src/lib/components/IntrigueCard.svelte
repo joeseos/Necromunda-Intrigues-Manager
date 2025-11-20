@@ -21,7 +21,7 @@
     if (!headerTextElement) return;
     
     const container = headerTextElement.parentElement;
-    const maxWidth = container.offsetWidth * 0.85;
+    const maxWidth = container.offsetWidth * 0.75;
     
     let fontSize = 25;
     headerTextElement.style.fontSize = fontSize + 'px';
