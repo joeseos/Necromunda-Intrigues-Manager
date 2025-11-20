@@ -298,3 +298,4 @@
     font-size: 8px !important;  /* Increased from 7px */
   }
 }
+</style>
