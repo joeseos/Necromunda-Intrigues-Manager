@@ -167,7 +167,7 @@
   .info-section {
     display: flex;
     flex-direction: column;
-    gap: clamp(1px, 0.3vh, 3px);
+    gap: 0;
   }
 
   .info-row {
