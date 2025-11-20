@@ -1,3 +1,131 @@
+<script>
+  import { onMount } from 'svelte';
+  
+  export let intrigue;
+  
+  const isOutlaw = intrigue.suit === 'diamonds';
+  let headerTextElement;
+  
+  function handleClick() {
+    const event = new CustomEvent('cardclick', {
+      detail: intrigue
+    });
+    document.dispatchEvent(event);
+  }
+  
+  onMount(() => {
+    // Wait for fonts to load before fitting text
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        fitText();
+      });
+    } else {
+      // Fallback for older browsers - small delay
+      setTimeout(() => {
+        fitText();
+      }, 100);
+    }
+
+    // Fit text for print, then restore after
+    const handleBeforePrint = () => {
+      fitTextForPrint();
+    };
+    
+    const handleAfterPrint = () => {
+      fitText(); // Restore screen sizing
+    };
+    
+    window.addEventListener('beforeprint', handleBeforePrint);
+    window.addEventListener('afterprint', handleAfterPrint);
+    
+    return () => {
+      window.removeEventListener('beforeprint', handleBeforePrint);
+      window.removeEventListener('afterprint', handleAfterPrint);
+    };
+  });
+  
+  function fitText() {
+    if (!headerTextElement) return;
+    
+    const container = headerTextElement.parentElement;
+    const maxWidth = container.offsetWidth * 0.78;
+    
+    let fontSize = 25;
+    headerTextElement.style.fontSize = fontSize + 'px';
+    
+    while (headerTextElement.scrollWidth > maxWidth && fontSize > 7) {
+      fontSize -= 0.5;
+      headerTextElement.style.fontSize = fontSize + 'px';
+    }
+  }
+
+  function fitTextForPrint() {
+    if (!headerTextElement) return;
+    
+    // For print, use 75mm card width
+    // 75mm = ~283px at 96dpi
+    const printCardWidth = 283;
+    const maxWidth = printCardWidth * 0.78;
+    
+    let fontSize = 17; // Start smaller for print
+    headerTextElement.style.fontSize = fontSize + 'px';
+    
+    // Temporarily measure with print context
+    const originalDisplay = headerTextElement.style.display;
+    headerTextElement.style.display = 'inline-block';
+    
+    while (headerTextElement.scrollWidth > maxWidth && fontSize > 7) {
+      fontSize -= 0.5;
+      headerTextElement.style.fontSize = fontSize + 'px';
+    }
+    
+    headerTextElement.style.display = originalDisplay;
+  }
+</script>
+
+<div
+  class="intrigue-card"
+  on:click={handleClick}
+  on:keypress={(e) => e.key === 'Enter' && handleClick()}
+  role="button"
+  tabindex="0"
+>
+  <div class="overlay"></div>
+
+  <div class="card-content">
+    <div class="header-section">
+      <div class="header-text" bind:this={headerTextElement}>{intrigue.name}</div>
+    </div>
+
+    <div class="body-section">
+      <!-- Description (if available) -->
+      {#if intrigue.description}
+        <div class="description-text">{intrigue.description}</div>
+      {/if}
+
+      <div class="info-section">
+        <div class="info-row">
+          <span class="info-label">Category: </span>
+          <span class="info-value">{intrigue.category}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Test: </span>
+          <span class="info-value">{intrigue.alignmentTest}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Reward: </span>
+          <span class="info-value">{intrigue.reward}</span>
+        </div>
+      </div>
+
+      <div class="criteria-section">
+        <span class="criteria-label">Criteria: </span>
+        <span class="criteria-text">{intrigue.criteria}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
   .intrigue-card {
     position: relative;
@@ -77,7 +205,7 @@
 
   .description-text {
     text-align: center;
-    font-size: clamp(11px, 1.5vw, 14px); /* Increased from 6px-9px */
+    font-size: clamp(11px, 1.5vw, 14px);
     line-height: 1.3;
     color: #000000;
     font-weight: 400;
@@ -93,7 +221,7 @@
   }
 
   .info-row {
-    font-size: clamp(11px, 1.5vw, 14px); /* Increased from 7px-10px */
+    font-size: clamp(11px, 1.5vw, 14px);
   }
 
   .info-label {
@@ -108,7 +236,7 @@
 
   .criteria-section {
     margin-top: clamp(4px, 0.8vh, 8px);
-    font-size: clamp(10px, 1.4vw, 13px); /* Increased from 6px-9px */
+    font-size: clamp(10px, 1.4vw, 13px);
   }
 
   .criteria-label {
@@ -139,7 +267,6 @@
       print-color-adjust: exact !important;
     }
 
-    /* Override for print - smaller text */
     .description-text {
       font-size: 7px !important;
     }
