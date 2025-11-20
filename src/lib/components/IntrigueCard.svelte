@@ -295,7 +295,7 @@
   }
 
   .criteria-section {
-    font-size: 8px !important;  /* Increased from 7px */
+    font-size: 9px !important;  /* Increased from 7px */
   }
 }
 </style>
