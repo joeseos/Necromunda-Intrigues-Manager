@@ -205,7 +205,7 @@
 
   .description-text {
     text-align: center;
-    font-size: clamp(11px, 1.5vw, 14px);
+    font-size: clamp(6px, 0.8vw, 9px);
     line-height: 1.3;
     color: #000000;
     font-weight: 400;
@@ -221,7 +221,7 @@
   }
 
   .info-row {
-    font-size: clamp(11px, 1.5vw, 14px);
+    font-size: clamp(7px, 0.9vw, 10px);
   }
 
   .info-label {
@@ -236,7 +236,7 @@
 
   .criteria-section {
     margin-top: clamp(4px, 0.8vh, 8px);
-    font-size: clamp(10px, 1.4vw, 13px);
+    font-size: clamp(6px, 0.8vw, 9px);
   }
 
   .criteria-label {
@@ -248,6 +248,21 @@
     line-height: 1.4;
     color: #000000;
     font-weight: 400;
+  }
+
+  /* Mobile-specific larger text */
+  @media (max-width: 640px) {
+    .description-text {
+      font-size: 11px;
+    }
+
+    .info-row {
+      font-size: 11px;
+    }
+
+    .criteria-section {
+      font-size: 10px;
+    }
   }
 
   @media print {
