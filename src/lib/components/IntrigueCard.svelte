@@ -164,7 +164,7 @@
   }
 
   .info-value {
-    font-weight: 600;
+    font-weight: normal;
     color: #000000;
   }
 
