@@ -23,7 +23,7 @@
     const container = headerTextElement.parentElement;
     const maxWidth = container.offsetWidth * 0.85;
     
-    let fontSize = 13;
+    let fontSize = 25;
     headerTextElement.style.fontSize = fontSize + 'px';
     
     while (headerTextElement.scrollWidth > maxWidth && fontSize > 7) {
@@ -127,7 +127,7 @@
   top: 80%;
   transform: translate(-50%, -50%);
   font-family: 'Redeye Sans', sans-serif;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
