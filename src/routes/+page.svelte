@@ -296,43 +296,54 @@
     /* Show print content */
     .print-only {
       display: block !important;
-      padding: 10mm;
+      padding: 5mm;
       background: white;
     }
 
     .print-header {
       text-align: center;
-      font-size: 28px;
+      font-size: 24px;
       font-weight: bold;
-      margin-bottom: 10mm;
+      margin-bottom: 8mm;
       color: #000;
     }
 
     .print-grid {
       display: grid;
-      grid-template-columns: repeat(2, 75mm);
-      gap: 10mm;
+      grid-template-columns: repeat(3, 63mm);
+      gap: 5mm;
       justify-content: center;
     }
 
     .print-card-wrapper {
       page-break-inside: avoid;
       break-inside: avoid;
-      width: 75mm;
-      height: 110mm;
+      width: 63mm;
+      height: 88mm;
     }
 
-    /* Set exact card dimensions: 75mm width × 110mm height */
+    /* Set exact card dimensions: 63mm width × 88mm height for 3 per row */
     :global(.intrigue-card) {
-      width: 75mm !important;
-      height: 110mm !important;
+      width: 63mm !important;
+      height: 88mm !important;
       max-width: none !important;
-      min-width: 75mm !important;
-      min-height: 110mm !important;
+      min-width: 63mm !important;
+      min-height: 88mm !important;
       margin: 0 !important;
       box-shadow: none !important;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
+    }
+
+    /* Fix header text sizing for print */
+    :global(.header-text) {
+      font-size: 12px !important;
+      letter-spacing: 0.05em !important;
+      line-height: 1.1 !important;
+      white-space: normal !important;
+      max-width: 85% !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
     }
 
     /* Force overlay to print */
@@ -343,7 +354,7 @@
 
     @page {
       size: A4 portrait;
-      margin: 10mm;
+      margin: 8mm;
     }
   }
 </style>
