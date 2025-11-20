@@ -26,15 +26,21 @@
       }, 100);
     }
 
-    // Fit text again before printing
+    // Fit text for print, then restore after
     const handleBeforePrint = () => {
       fitTextForPrint();
     };
     
+    const handleAfterPrint = () => {
+      fitText(); // Restore screen sizing
+    };
+    
     window.addEventListener('beforeprint', handleBeforePrint);
+    window.addEventListener('afterprint', handleAfterPrint);
     
     return () => {
       window.removeEventListener('beforeprint', handleBeforePrint);
+      window.removeEventListener('afterprint', handleAfterPrint);
     };
   });
   
@@ -176,7 +182,7 @@
     top: 80%;
     transform: translate(-50%, -50%);
     font-family: 'Redeye Sans', sans-serif;
-    font-size: 25px;
+    font-size: 16px; /* Safe default that fits most titles */
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
