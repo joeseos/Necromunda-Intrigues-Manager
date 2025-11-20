@@ -296,7 +296,7 @@
     /* Show print content */
     .print-only {
       display: block !important;
-      padding: 5mm;
+      padding: 8mm;
       background: white;
     }
 
@@ -304,41 +304,41 @@
       text-align: center;
       font-size: 24px;
       font-weight: bold;
-      margin-bottom: 8mm;
+      margin-bottom: 10mm;
       color: #000;
     }
 
     .print-grid {
       display: grid;
-      grid-template-columns: repeat(3, 63mm);
-      gap: 5mm;
+      grid-template-columns: repeat(2, 75mm);
+      gap: 10mm;
       justify-content: center;
     }
 
     .print-card-wrapper {
       page-break-inside: avoid;
       break-inside: avoid;
-      width: 63mm;
-      height: 88mm;
+      width: 75mm;
+      height: 110mm;
     }
 
-    /* Set exact card dimensions: 63mm width × 88mm height for 3 per row */
+    /* Set exact card dimensions: 75mm width × 110mm height (2×2 = 4 cards per page) */
     :global(.intrigue-card) {
-      width: 63mm !important;
-      height: 88mm !important;
+      width: 75mm !important;
+      height: 110mm !important;
       max-width: none !important;
-      min-width: 63mm !important;
-      min-height: 88mm !important;
+      min-width: 75mm !important;
+      min-height: 110mm !important;
       margin: 0 !important;
       box-shadow: none !important;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
     }
 
-    /* Fix header text sizing for print */
+    /* Fix header text sizing for print - scale appropriately */
     :global(.header-text) {
-      font-size: 12px !important;
-      letter-spacing: 0.05em !important;
+      font-size: 16px !important;
+      letter-spacing: 0.06em !important;
       line-height: 1.1 !important;
       white-space: normal !important;
       max-width: 85% !important;
