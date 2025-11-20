@@ -291,10 +291,10 @@
   }
 
   .info-row {
-    font-size: 10px !important;  /* Increased from 8px */
+    font-size: 9px !important;  /* Increased from 8px */
   }
 
   .criteria-section {
-    font-size: 9px !important;  /* Increased from 7px */
+    font-size: 8px !important;  /* Increased from 7px */
   }
 }
