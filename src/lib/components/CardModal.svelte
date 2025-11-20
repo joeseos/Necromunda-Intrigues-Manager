@@ -225,15 +225,16 @@
     transform: scale(1.2);
   }
 
-  .card-body {
-    flex: 1;
-    padding: clamp(20px, 3vh, 30px) clamp(24px, 4vw, 50px) clamp(50px, 7vh, 85px);
-    display: flex;
-    flex-direction: column;
-    gap: clamp(10px, 1.5vh, 16px);
-    overflow: hidden;
-    font-family: 'Rodchenko', sans-serif;
-  }
+.card-body {
+  flex: 1;
+  /* Match IntrigueCard proportions but scaled for modal size */
+  padding: clamp(20px, 3vh, 30px) clamp(20px, 3.5vw, 35px) clamp(60px, 8vh, 100px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.5vh, 16px);
+  overflow: hidden;
+  font-family: 'Rodchenko', sans-serif;
+}
 
   .description-text {
     text-align: center;
