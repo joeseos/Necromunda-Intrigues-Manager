@@ -160,6 +160,7 @@
     color: #000000;
     font-weight: 400;
     font-style: italic;
+    margin-top: clamp(6px, 1.2vh, 12px);
     margin-bottom: clamp(4px, 0.8vh, 8px);
   }
 
