@@ -253,7 +253,7 @@
   /* Mobile-specific larger text and consistent padding */
   @media (max-width: 640px) {
     .body-section {
-      padding: 12px 20px 40px; /* Fixed padding for consistent alignment */
+      padding: 12px 20px 40px;
     }
 
     .description-text {
@@ -269,32 +269,33 @@
     }
   }
 
-@media print {
-  .intrigue-card {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    box-shadow: none !important;
-    cursor: default !important;
-  }
+  @media print {
+    .intrigue-card {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      box-shadow: none !important;
+      cursor: default !important;
+    }
 
-  .intrigue-card:hover {
-    transform: none !important;
-  }
+    .intrigue-card:hover {
+      transform: none !important;
+    }
 
-  .overlay {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
+    .overlay {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
 
-  .description-text {
-    font-size: 11px !important;  /* Increased from 9px */
-  }
+    .description-text {
+      font-size: 11px !important;
+    }
 
-  .info-row {
-    font-size: 12px !important;  /* Increased from 10px */
-  }
+    .info-row {
+      font-size: 12px !important;
+    }
 
-  .criteria-section {
-    font-size: 11px !important;  /* Increased from 9px */
+    .criteria-section {
+      font-size: 11px !important;
+    }
   }
-}
+</style>
