@@ -228,7 +228,7 @@
 .card-body {
   flex: 1;
   /* Match IntrigueCard proportions but scaled for modal size */
-  padding: clamp(20px, 3vh, 30px) clamp(20px, 3.5vw, 35px) clamp(60px, 8vh, 100px);
+  padding: clamp(20px, 3vh, 30px) clamp(20px, 3.5vw, 35px) clamp(70px, 9vh, 110px);
   display: flex;
   flex-direction: column;
   gap: clamp(10px, 1.5vh, 16px);
