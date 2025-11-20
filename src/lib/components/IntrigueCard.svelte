@@ -127,7 +127,7 @@
   top: 80%;
   transform: translate(-50%, -50%);
   font-family: 'Redeye Sans', sans-serif;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
