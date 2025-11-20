@@ -14,7 +14,17 @@
   }
   
   onMount(() => {
-    fitText();
+    // Wait for fonts to load before fitting text
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        fitText();
+      });
+    } else {
+      // Fallback for older browsers - small delay
+      setTimeout(() => {
+        fitText();
+      }, 100);
+    }
   });
   
   function fitText() {
