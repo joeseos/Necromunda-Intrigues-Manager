@@ -281,6 +281,13 @@
   }
 
   @media print {
+    /* Force background printing */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
     /* Hide screen content */
     .no-print {
       display: none !important;
@@ -290,6 +297,7 @@
     .print-only {
       display: block !important;
       padding: 20px;
+      background: white;
     }
 
     .print-header {
@@ -311,11 +319,20 @@
       break-inside: avoid;
     }
 
-    /* Adjust card sizing for print */
+    /* Adjust card styling for print - remove shadows and ensure backgrounds print */
     :global(.intrigue-card) {
       width: 100% !important;
       max-width: 400px !important;
       margin: 0 auto;
+      box-shadow: none !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Force overlay to print */
+    :global(.overlay) {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
 
     @page {
