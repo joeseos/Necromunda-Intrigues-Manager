@@ -347,25 +347,24 @@
       print-color-adjust: exact !important;
     }
 
-    /* Ensure body text scales proportionally */
-    :global(.body-section) {
-      padding: 3mm 4mm 8mm !important;
-    }
+/* Ensure body text scales proportionally */
+:global(.body-section) {
+  padding: 3mm 4mm 8mm !important;
+}
 
-    :global(.description-text) {
-      font-size: 7px !important;
-      margin-top: 2mm !important;
-      margin-bottom: 1.5mm !important;
-    }
+:global(.description-text) {
+  font-size: 11px !important;
+  margin-top: 2mm !important;
+  margin-bottom: 1.5mm !important;
+}
 
-    :global(.info-row) {
-      font-size: 8px !important;
-    }
+:global(.info-row) {
+  font-size: 12px !important;
+}
 
-    :global(.criteria-section) {
-      margin-top: 1.5mm !important;
-      font-size: 7px !important;
-    }
+:global(.criteria-section) {
+  font-size: 11px !important;
+}
 
     @page {
       size: A4 portrait;
