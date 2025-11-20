@@ -1,13 +1,36 @@
 <script>
+  import { onMount } from 'svelte';
+  
   export let intrigue;
   
   const isOutlaw = intrigue.suit === 'diamonds';
+  let headerTextElement;
   
   function handleClick() {
     const event = new CustomEvent('cardclick', {
       detail: intrigue
     });
     document.dispatchEvent(event);
+  }
+  
+  onMount(() => {
+    fitText();
+  });
+  
+  function fitText() {
+    if (!headerTextElement) return;
+    
+    const container = headerTextElement.parentElement;
+    const maxWidth = container.offsetWidth * 0.85; // 85% of container width
+    
+    let fontSize = 13; // Start with max size (in px)
+    headerTextElement.style.fontSize = fontSize + 'px';
+    
+    // Decrease font size until it fits
+    while (headerTextElement.scrollWidth > maxWidth && fontSize > 7) {
+      fontSize -= 0.5;
+      headerTextElement.style.fontSize = fontSize + 'px';
+    }
   }
 </script>
 
@@ -22,7 +45,7 @@
 
   <div class="card-content">
     <div class="header-section">
-      <div class="header-text">{intrigue.name}</div>
+      <div class="header-text" bind:this={headerTextElement}>{intrigue.name}</div>
     </div>
 
     <div class="body-section">
@@ -107,17 +130,16 @@
     top: 80%;
     transform: translate(-50%, -50%);
     font-family: 'Lithos Black', sans-serif;
-    font-size: clamp(9px, 1.2vw, 13px);
+    font-size: 13px;  /* Default size, will be adjusted by JS */
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     text-align: center;
     line-height: 1.2;
     white-space: nowrap;
-    max-width: 80%;
-    overflow: visible;
+    max-width: 85%;
   }
 
   .body-section {
