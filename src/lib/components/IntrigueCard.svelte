@@ -25,6 +25,17 @@
         fitText();
       }, 100);
     }
+
+    // Fit text again before printing
+    const handleBeforePrint = () => {
+      fitTextForPrint();
+    };
+    
+    window.addEventListener('beforeprint', handleBeforePrint);
+    
+    return () => {
+      window.removeEventListener('beforeprint', handleBeforePrint);
+    };
   });
   
   function fitText() {
@@ -40,6 +51,29 @@
       fontSize -= 0.5;
       headerTextElement.style.fontSize = fontSize + 'px';
     }
+  }
+
+  function fitTextForPrint() {
+    if (!headerTextElement) return;
+    
+    // For print, use 75mm card width
+    // 75mm = ~283px at 96dpi
+    const printCardWidth = 283;
+    const maxWidth = printCardWidth * 0.78;
+    
+    let fontSize = 17; // Start smaller for print
+    headerTextElement.style.fontSize = fontSize + 'px';
+    
+    // Temporarily measure with print context
+    const originalDisplay = headerTextElement.style.display;
+    headerTextElement.style.display = 'inline-block';
+    
+    while (headerTextElement.scrollWidth > maxWidth && fontSize > 7) {
+      fontSize -= 0.5;
+      headerTextElement.style.fontSize = fontSize + 'px';
+    }
+    
+    headerTextElement.style.display = originalDisplay;
   }
 </script>
 
