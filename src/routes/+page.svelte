@@ -331,25 +331,40 @@
       min-height: 110mm !important;
       margin: 0 !important;
       box-shadow: none !important;
+      border-radius: 0 !important;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
     }
 
-    /* Fix header text sizing for print - scale appropriately */
-    :global(.header-text) {
-      font-size: 16px !important;
-      letter-spacing: 0.06em !important;
-      line-height: 1.1 !important;
-      white-space: normal !important;
-      max-width: 85% !important;
-      word-wrap: break-word !important;
-      overflow-wrap: break-word !important;
+    /* Remove hover effect in print */
+    :global(.intrigue-card:hover) {
+      transform: none !important;
     }
 
     /* Force overlay to print */
     :global(.overlay) {
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
+    }
+
+    /* Ensure body text scales proportionally */
+    :global(.body-section) {
+      padding: 3mm 4mm 8mm !important;
+    }
+
+    :global(.description-text) {
+      font-size: 7px !important;
+      margin-top: 2mm !important;
+      margin-bottom: 1.5mm !important;
+    }
+
+    :global(.info-row) {
+      font-size: 8px !important;
+    }
+
+    :global(.criteria-section) {
+      margin-top: 1.5mm !important;
+      font-size: 7px !important;
     }
 
     @page {
