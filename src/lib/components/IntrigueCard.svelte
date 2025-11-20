@@ -136,7 +136,7 @@
   text-align: center;
   line-height: 1.2;
   white-space: nowrap;
-  max-width: 85%;
+  max-width: 75%;
 }
 
   .body-section {
