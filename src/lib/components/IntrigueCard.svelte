@@ -121,23 +121,23 @@
     flex-shrink: 0;
   }
 
-  .header-text {
-    position: absolute;
-    left: 50%;
-    top: 80%;
-    transform: translate(-50%, -50%);
-    font-family: 'Lithos Black', sans-serif;
-    font-size: 13px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-    text-align: center;
-    line-height: 1.2;
-    white-space: nowrap;
-    max-width: 85%;
-  }
+.header-text {
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  font-family: 'Redeye Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: 85%;
+}
 
   .body-section {
     flex: 1;
