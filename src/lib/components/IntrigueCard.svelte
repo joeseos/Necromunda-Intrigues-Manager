@@ -269,33 +269,32 @@
     }
   }
 
-  @media print {
-    .intrigue-card {
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-      box-shadow: none !important;
-      cursor: default !important;
-    }
-
-    .intrigue-card:hover {
-      transform: none !important;
-    }
-
-    .overlay {
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-    }
-
-    .description-text {
-      font-size: 7px !important;
-    }
-
-    .info-row {
-      font-size: 8px !important;
-    }
-
-    .criteria-section {
-      font-size: 7px !important;
-    }
+@media print {
+  .intrigue-card {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    cursor: default !important;
   }
-</style>
+
+  .intrigue-card:hover {
+    transform: none !important;
+  }
+
+  .overlay {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .description-text {
+    font-size: 9px !important;  /* Increased from 7px */
+  }
+
+  .info-row {
+    font-size: 10px !important;  /* Increased from 8px */
+  }
+
+  .criteria-section {
+    font-size: 9px !important;  /* Increased from 7px */
+  }
+}
