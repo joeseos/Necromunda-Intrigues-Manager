@@ -21,12 +21,11 @@
     if (!headerTextElement) return;
     
     const container = headerTextElement.parentElement;
-    const maxWidth = container.offsetWidth * 0.85; // 85% of container width
+    const maxWidth = container.offsetWidth * 0.85;
     
-    let fontSize = 13; // Start with max size (in px)
+    let fontSize = 13;
     headerTextElement.style.fontSize = fontSize + 'px';
     
-    // Decrease font size until it fits
     while (headerTextElement.scrollWidth > maxWidth && fontSize > 7) {
       fontSize -= 0.5;
       headerTextElement.style.fontSize = fontSize + 'px';
@@ -51,23 +50,23 @@
     <div class="body-section">
       <div class="info-section">
         <div class="info-row">
-          <span class="info-label">CATEGORY</span>
+          <span class="info-label">Category</span>
           <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
             {intrigue.category}
           </span>
         </div>
         <div class="info-row">
-          <span class="info-label">TEST</span>
+          <span class="info-label">Test</span>
           <span class="info-value">{intrigue.alignmentTest}</span>
         </div>
         <div class="info-row">
-          <span class="info-label">REWARD</span>
+          <span class="info-label">Reward</span>
         </div>
         <div class="reward-text">{intrigue.reward}</div>
       </div>
 
       <div class="criteria-section">
-        <div class="criteria-label">CRITERIA</div>
+        <div class="criteria-label">Criteria</div>
         <div class="criteria-text">{intrigue.criteria}</div>
       </div>
     </div>
@@ -130,7 +129,7 @@
     top: 80%;
     transform: translate(-50%, -50%);
     font-family: 'Lithos Black', sans-serif;
-    font-size: 13px;  /* Default size, will be adjusted by JS */
+    font-size: 13px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -165,7 +164,6 @@
   }
 
   .info-label {
-    text-transform: uppercase;
     font-weight: 700;
     color: #000000;
     letter-spacing: 0.05em;
@@ -193,7 +191,6 @@
   }
 
   .criteria-label {
-    text-transform: uppercase;
     font-size: clamp(6px, 0.85vw, 9px);
     font-weight: 700;
     color: #000000;
