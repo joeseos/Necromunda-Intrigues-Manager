@@ -48,6 +48,11 @@
     </div>
 
     <div class="body-section">
+      <!-- Description (if available) -->
+      {#if intrigue.description}
+        <div class="description-text">{intrigue.description}</div>
+      {/if}
+
       <div class="info-section">
         <div class="info-row">
           <span class="info-label">Category: </span>
@@ -121,23 +126,23 @@
     flex-shrink: 0;
   }
 
-.header-text {
-  position: absolute;
-  left: 50%;
-  top: 80%;
-  transform: translate(-50%, -50%);
-  font-family: 'Redeye Sans', sans-serif;
-  font-size: 25px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-  text-align: center;
-  line-height: 1.2;
-  white-space: nowrap;
-  max-width: 75%;
-}
+  .header-text {
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+    font-family: 'Redeye Sans', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+    max-width: 75%;
+  }
 
   .body-section {
     flex: 1;
@@ -146,6 +151,16 @@
     flex-direction: column;
     gap: clamp(8px, 1.5vh, 12px);
     overflow: hidden;
+  }
+
+  .description-text {
+    text-align: center;
+    font-size: clamp(6px, 0.8vw, 9px);
+    line-height: 1.3;
+    color: #000000;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: clamp(4px, 0.8vh, 8px);
   }
 
   .info-section {
