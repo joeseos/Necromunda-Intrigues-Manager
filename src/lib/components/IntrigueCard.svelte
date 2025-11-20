@@ -250,18 +250,22 @@
     font-weight: 400;
   }
 
-  /* Mobile-specific larger text */
+  /* Mobile-specific larger text and consistent padding */
   @media (max-width: 640px) {
+    .body-section {
+      padding: 12px 20px 40px; /* Fixed padding for consistent alignment */
+    }
+
     .description-text {
-      font-size: 11px;
+      font-size: 13px;
     }
 
     .info-row {
-      font-size: 11px;
+      font-size: 13px;
     }
 
     .criteria-section {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 
