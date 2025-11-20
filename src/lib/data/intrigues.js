@@ -247,4 +247,69 @@ export const intrigues = [
     name: 'WATCH FROM THE SHADOWS',
     description: 'If you cut off the head of the snake then the body will die.',
     category: 'Law Abiding',
-    alignmentTest: '
+    alignmentTest: '3D6',
+    reward: '50 credits, one fighter gains Cunning skill',
+    criteria:
+      "During the Ready Fighters step of any Priority phase, randomly choose a fighter from your opponent's crew. For the remainder of this battle, any of your fighters within 12\" of the chosen enemy fighter may perform the Shadow (Double) action. If at the end of the battle, you have a fighter Shadowing an enemy fighter, your gang can claim this Intrigue."
+  },
+  {
+    id: '9-spades',
+    suit: 'spades',
+    value: '9',
+    name: 'BREAK THEIR WILL',
+    description: 'If justice cannot triumph through sanctioned means, it will triumph by paying for the heads of dead criminals.',
+    category: 'Law Abiding',
+    alignmentTest: '4D6',
+    reward: '+4 Reputation, opponent loses -2 Reputation',
+    criteria:
+      'You can only claim this Intrigue if the enemy is an Outlaw gang. If it is not, you may discard this Intrigue and draw another. If, at the end of the battle, your gang has taken the enemy gang\'s Leader and all of their Champions that took part in this battle Out of Action, your gang can claim this Intrigue.'
+  },
+  {
+    id: '10-spades',
+    suit: 'spades',
+    value: '10',
+    name: 'MARK THE IMPURE',
+    description: 'Evidence must be gathered for the prosecution of a suspected recidivist.',
+    category: 'Law Abiding',
+    alignmentTest: 'D6',
+    reward: '+2 Reputation',
+    criteria:
+      "When one of your fighters activates within 6\" of your opponent's Leader, they may perform the Pict Capture (Double) action. If a model that has performed this action begins a later activation within 1\" of an edge of the battlefield, you can remove them from play as they make off with the evidence required. When the battle ends, your gang can claim this Intrigue."
+  },
+  {
+    id: 'jack-spades',
+    suit: 'spades',
+    value: 'J',
+    name: 'CARRY A GUILD BOND',
+    description: 'The Guilders need the deeds and bonds of their protected trade carried through a dangerous part of the hive.',
+    category: 'Law Abiding',
+    alignmentTest: 'D6',
+    reward: '+2 Reputation',
+    criteria:
+      "Choose one fighter from your crew to be the courier. If, at the end of any round, the courier is in the enemy's deployment zone, you can remove them from the battlefield and your gang can claim this Intrigue."
+  },
+  {
+    id: 'queen-spades',
+    suit: 'spades',
+    value: 'Q',
+    name: 'BRING THEM IN DEAD OR ALIVE',
+    description: "The Merchant Guild offers cold, hard creds for bounties fulfilled – and doesn't care overly much how gangs go about collecting them.",
+    category: 'Law Abiding',
+    alignmentTest: '4D6',
+    reward: '50 credits per enemy fighter taken Out',
+    criteria:
+      'You can only claim this Intrigue if the enemy is an Outlaw gang. If it is not, you may discard this Intrigue and draw another. During the Wrap-up step, claim this Intrigue for each enemy fighter taken Out of Action.'
+  },
+  {
+    id: 'king-spades',
+    suit: 'spades',
+    value: 'K',
+    name: 'RETRIEVE THE INFORMER',
+    description: "One of the enemy's gang is an Enforcer infiltrator who needs escorting to safety.",
+    category: 'Law Abiding',
+    alignmentTest: '3D6',
+    reward: '150 credits',
+    criteria:
+      "One randomly determined fighter from your opponent's crew (not a Leader or Champion) is revealed as an imposter and counts as part of your gang for the remainder of the battle. If the imposter is Standing and Active within your deployment zone when the battle ends, your gang can claim this Intrigue."
+  }
+];
