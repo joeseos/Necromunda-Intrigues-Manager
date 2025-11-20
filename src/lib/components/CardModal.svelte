@@ -1,8 +1,11 @@
 <script>
+  import { onMount } from 'svelte';
+  
   export let intrigue;
   export let onClose;
 
   const isOutlaw = intrigue.suit === 'diamonds';
+  let headerTextElement;
 
   function handleBackdropClick(e) {
     if (e.target === e.currentTarget) {
@@ -13,6 +16,25 @@
   function handleKeydown(e) {
     if (e.key === 'Escape') {
       onClose();
+    }
+  }
+  
+  onMount(() => {
+    fitText();
+  });
+  
+  function fitText() {
+    if (!headerTextElement) return;
+    
+    const container = headerTextElement.parentElement;
+    const maxWidth = container.offsetWidth * 0.78;
+    
+    let fontSize = 30;  // Larger starting size for modal
+    headerTextElement.style.fontSize = fontSize + 'px';
+    
+    while (headerTextElement.scrollWidth > maxWidth && fontSize > 10) {
+      fontSize -= 0.5;
+      headerTextElement.style.fontSize = fontSize + 'px';
     }
   }
 </script>
@@ -38,7 +60,7 @@
     <div class="card-content">
       <!-- Header -->
       <div class="card-header">
-        <div class="header-text" id="modal-title">{intrigue.name}</div>
+        <div class="header-text" id="modal-title" bind:this={headerTextElement}>{intrigue.name}</div>
         <button
           on:click={onClose}
           class="close-button"
@@ -58,29 +80,27 @@
 
         <div class="info-section">
           <div class="info-row">
-            <span class="info-label">Category:</span>
-            <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
-              {intrigue.category}
-            </span>
+            <span class="info-label">Category: </span>
+            <span class="info-value">{intrigue.category}</span>
           </div>
           <div class="info-row">
-            <span class="info-label">Test:</span>
+            <span class="info-label">Test: </span>
             <span class="info-value">{intrigue.alignmentTest}</span>
           </div>
           <div class="info-row">
-            <span class="info-label">Reward:</span>
+            <span class="info-label">Reward: </span>
             <span class="info-value">{intrigue.reward}</span>
           </div>
         </div>
 
         <div class="criteria-section">
-          <div class="criteria-label">Criteria:</div>
-          <div class="criteria-text">{intrigue.criteria}</div>
+          <span class="criteria-label">Criteria: </span>
+          <span class="criteria-text">{intrigue.criteria}</span>
         </div>
 
         {#if intrigue.notes}
           <div class="notes-section">
-            <div class="notes-text">{intrigue.notes}</div>
+            <span class="notes-text">{intrigue.notes}</span>
           </div>
         {/if}
       </div>
@@ -156,24 +176,23 @@
     flex-shrink: 0;
   }
 
-.header-text {
-  position: absolute;
-  left: 50%;
-  top: 80%;
-  transform: translate(-50%, -50%);
-  font-family: 'Lithos Black', sans-serif;
-  font-size: clamp(11px, 1.5vw, 18px);  /* Smaller to fit longer titles */
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;  /* Minimal letter spacing */
-  color: #ffffff;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
-  text-align: center;
-  line-height: 1.2;
-  white-space: nowrap;  /* Single line only */
-  max-width: 80%;  /* Stay within the banner borders */
-  overflow: visible;  /* Allow it to show */
-}
+  .header-text {
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+    font-family: 'Redeye Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+    max-width: 78%;
+  }
 
   .close-button {
     position: absolute;
@@ -182,7 +201,7 @@
     background: none;
     border: none;
     color: #ffffff;
-    font-family: 'Lithos Black', sans-serif;
+    font-family: 'Redeye Sans', sans-serif;
     font-size: clamp(24px, 3vw, 40px);
     font-weight: bold;
     cursor: pointer;
@@ -204,16 +223,11 @@
 
   .card-body {
     flex: 1;
-    /* Increased top padding to create space after the header banner */
     padding: clamp(20px, 3vh, 30px) clamp(24px, 4vw, 50px) clamp(50px, 7vh, 85px);
-    
     display: flex;
     flex-direction: column;
     gap: clamp(10px, 1.5vh, 16px);
-    
-    /* No scrolling - content must fit */
     overflow: hidden;
-    
     font-family: 'Rodchenko', sans-serif;
   }
 
@@ -222,54 +236,43 @@
     font-size: clamp(11px, 1.3vw, 14px);
     line-height: 1.4;
     color: #000000;
-    font-weight: 500;
+    font-weight: 400;
+    font-style: italic;
+    margin-top: clamp(6px, 1.2vh, 12px);
     margin-bottom: clamp(4px, 0.8vh, 8px);
   }
 
   .info-section {
     display: flex;
     flex-direction: column;
-    gap: clamp(4px, 0.8vh, 8px);
+    gap: 0;
   }
 
   .info-row {
-    display: flex;
-    justify-content: flex-start;
-    align-items: baseline;
-    gap: clamp(6px, 1vw, 10px);
     font-size: clamp(11px, 1.3vw, 14px);
   }
 
   .info-label {
-    font-weight: 600;
+    font-weight: 700;
     color: #000000;
-    text-transform: uppercase;
   }
 
   .info-value {
-    font-weight: 700;
+    font-weight: normal;
     color: #000000;
-  }
-
-  .outlaw-text {
-    color: #8B0000;
-    font-weight: 700;
   }
 
   .criteria-section {
     margin-top: clamp(6px, 1vh, 10px);
+    font-size: clamp(10px, 1.2vw, 13px);
   }
 
   .criteria-label {
-    font-size: clamp(11px, 1.3vw, 14px);
     font-weight: 700;
     color: #000000;
-    margin-bottom: clamp(6px, 1vh, 10px);
-    text-transform: uppercase;
   }
 
   .criteria-text {
-    font-size: clamp(10px, 1.2vw, 13px);
     line-height: 1.5;
     color: #000000;
     font-weight: 400;
@@ -277,10 +280,10 @@
 
   .notes-section {
     margin-top: clamp(6px, 1vh, 10px);
+    font-size: clamp(10px, 1.2vw, 13px);
   }
 
   .notes-text {
-    font-size: clamp(10px, 1.2vw, 13px);
     line-height: 1.5;
     color: #000000;
     font-weight: 400;
