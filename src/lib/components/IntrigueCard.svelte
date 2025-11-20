@@ -50,17 +50,15 @@
     <div class="body-section">
       <div class="info-section">
         <div class="info-row">
-          <span class="info-label">Category:</span>
-          <span class="info-value {isOutlaw ? 'outlaw-text' : ''}">
-            {intrigue.category}
-          </span>
+          <span class="info-label">Category: </span>
+          <span class="info-value">{intrigue.category}</span>
         </div>
         <div class="info-row">
-          <span class="info-label">Test:</span>
+          <span class="info-label">Test: </span>
           <span class="info-value">{intrigue.alignmentTest}</span>
         </div>
         <div class="info-row">
-          <span class="info-label">Reward:</span>
+          <span class="info-label">Reward: </span>
           <span class="info-value">{intrigue.reward}</span>
         </div>
       </div>
@@ -157,27 +155,17 @@
   }
 
   .info-row {
-    display: flex;
-    justify-content: flex-start;
-    align-items: baseline;
-    gap: clamp(4px, 0.6vw, 8px);
     font-size: clamp(7px, 0.9vw, 10px);
   }
 
   .info-label {
     font-weight: 700;
     color: #000000;
-    letter-spacing: 0.05em;
   }
 
   .info-value {
     font-weight: 600;
     color: #000000;
-  }
-
-  .outlaw-text {
-    color: #8B0000;
-    font-weight: 700;
   }
 
   .criteria-section {
@@ -189,7 +177,6 @@
     font-weight: 700;
     color: #000000;
     margin-bottom: clamp(4px, 0.8vh, 8px);
-    letter-spacing: 0.05em;
   }
 
   .criteria-text {
