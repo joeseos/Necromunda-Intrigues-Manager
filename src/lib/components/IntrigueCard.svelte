@@ -199,4 +199,22 @@
     color: #000000;
     font-weight: 400;
   }
+
+  @media print {
+    .intrigue-card {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      box-shadow: none !important;
+      cursor: default !important;
+    }
+
+    .intrigue-card:hover {
+      transform: none !important;
+    }
+
+    .overlay {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
 </style>
