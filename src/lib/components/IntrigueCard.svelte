@@ -287,14 +287,14 @@
   }
 
   .description-text {
-    font-size: 9px !important;  /* Increased from 7px */
+    font-size: 11px !important;  /* Increased from 9px */
   }
 
   .info-row {
-    font-size: 10px !important;  /* Increased from 8px */
+    font-size: 12px !important;  /* Increased from 10px */
   }
 
   .criteria-section {
-    font-size: 9px !important;  /* Increased from 7px */
+    font-size: 11px !important;  /* Increased from 9px */
   }
 }
