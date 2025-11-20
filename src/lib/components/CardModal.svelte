@@ -133,9 +133,13 @@
 
 .modal-card {
   position: relative;
-  width: min(500px, 90vw);
+  /* Calculate width that respects both viewport width and height constraints */
+  width: min(
+    500px,
+    85vw,
+    calc(85vh * 912 / 1335)  /* Width when height-constrained */
+  );
   aspect-ratio: 912 / 1335;
-  max-height: 90vh;
   background-image: url('/necromunda-bg.png');
   background-size: cover;
   background-position: center;
