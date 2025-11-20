@@ -21,7 +21,7 @@
     if (!headerTextElement) return;
     
     const container = headerTextElement.parentElement;
-    const maxWidth = container.offsetWidth * 0.80;
+    const maxWidth = container.offsetWidth * 0.78;
     
     let fontSize = 25;
     headerTextElement.style.fontSize = fontSize + 'px';
@@ -141,7 +141,7 @@
     text-align: center;
     line-height: 1.2;
     white-space: nowrap;
-    max-width: 80%;
+    max-width: 78%;
   }
 
   .body-section {
