@@ -69,8 +69,8 @@
       </div>
 
       <div class="criteria-section">
-        <div class="criteria-label">Criteria:</div>
-        <div class="criteria-text">{intrigue.criteria}</div>
+        <span class="criteria-label">Criteria: </span>
+        <span class="criteria-text">{intrigue.criteria}</span>
       </div>
     </div>
   </div>
@@ -186,17 +186,15 @@
 
   .criteria-section {
     margin-top: clamp(4px, 0.8vh, 8px);
+    font-size: clamp(6px, 0.8vw, 9px);
   }
 
   .criteria-label {
-    font-size: clamp(6px, 0.85vw, 9px);
     font-weight: 700;
     color: #000000;
-    margin-bottom: clamp(4px, 0.8vh, 8px);
   }
 
   .criteria-text {
-    font-size: clamp(6px, 0.8vw, 9px);
     line-height: 1.4;
     color: #000000;
     font-weight: 400;
