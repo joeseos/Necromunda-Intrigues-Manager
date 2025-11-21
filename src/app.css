@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'Lithos Black';
-  src: url('/fonts/lithosblackregular.otf') format('opentype');
+  src: url('/fonts/lithosblackregular.woff2') format('woff2'),
+       url('/fonts/lithosblackregular.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -8,7 +9,8 @@
 
 @font-face {
   font-family: 'Rodchenko';
-  src: url('/fonts/rodchenkocttregular.ttf') format('truetype');
+  src: url('/fonts/rodchenkocttregular.woff2') format('woff2'),
+       url('/fonts/rodchenkocttregular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -16,7 +18,8 @@
 
 @font-face {
   font-family: 'Redeye Sans';
-  src: url('/fonts/redeyesansw00bold.otf') format('opentype');
+  src: url('/fonts/redeyesansw00bold.woff2') format('woff2'),
+       url('/fonts/redeyesansw00bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
